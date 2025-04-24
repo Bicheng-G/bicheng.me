@@ -1,5 +1,5 @@
 ---
-title: Notes - Anthony Fu
+title: Notes - Bicheng Gu
 art: plum
 display: ''
 ---

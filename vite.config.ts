@@ -126,7 +126,7 @@ export default defineConfig({
 
         md.use(MarkdownItMagicLink, {
           linksMap: {
-            'NuxtLabs': 'https://nuxtlabs.com',
+            'Elitetax Systems': 'https://elitetaxsystems.com',
             'Vitest': 'https://github.com/vitest-dev/vitest',
             'Slidev': 'https://github.com/slidevjs/slidev',
             'VueUse': 'https://github.com/vueuse/vueuse',
@@ -146,7 +146,7 @@ export default defineConfig({
             'ESLint': 'https://github.com/eslint/eslint',
             'Astro': 'https://github.com/withastro/astro',
             'TwoSlash': 'https://github.com/twoslashes/twoslash',
-            'Anthony Fu Collective': { link: 'https://opencollective.com/antfu', imageUrl: 'https://github.com/antfu-collective.png' },
+            'Bicheng Gu Collective': { link: 'https://opencollective.com/antfu', imageUrl: 'https://github.com/antfu-collective.png' },
             'Netlify': { link: 'https://netlify.com', imageUrl: 'https://github.com/netlify.png' },
             'Stackblitz': { link: 'https://stackblitz.com', imageUrl: 'https://github.com/stackblitz.png' },
             'Vercel': { link: 'https://vercel.com', imageUrl: 'https://github.com/vercel.png' },
@@ -160,6 +160,7 @@ export default defineConfig({
             ['https://nuxtlabs.com', 'https://github.com/nuxtlabs.png'],
             [/opencollective\.com\/vite/, 'https://github.com/vitejs.png'],
             [/opencollective\.com\/elk/, 'https://github.com/elk-zone.png'],
+            // ['https://elitetaxsystems.com', 'https://imgur.com/a/ODOJZJS'],
           ],
         })
 
@@ -178,7 +179,7 @@ export default defineConfig({
               ? fs.copy(`${id.slice(0, -3)}.png`, `public/${path}`)
               : generateOg(frontmatter.title!.replace(/\s-\s.*$/, '').trim(), `public/${path}`),
           )
-          frontmatter.image = `https://antfu.me/${path}`
+          frontmatter.image = `https://bicheng.me/${path}`
         })()
         const head = defaults(frontmatter, options)
         return { head, frontmatter }

@@ -1,4 +1,4 @@
-export type MediaType = 'anime' | 'book' | 'movie' | 'drama' | 'game' | 'song'
+export type MediaType = 'quotes' | 'books' // | 'movie' | 'game' | 'song'
 export type MediaState = 'done' | 'doing' | 'todo'
 
 export interface MediaRecord {
@@ -10,284 +10,19 @@ export interface MediaRecord {
   lang?: string
 }
 
-export const anime: MediaRecord[] = [
+export const quotes: MediaRecord[] = [
   {
-    name: '鋼の錬金術師 FULLMETAL ALCHEMIST',
-    creator: '荒川弘',
+    name: 'The most difficult thing is the decision to act. The rest is merely tenacity.',
+    creator: 'Amelia Earhart',
   },
   {
-    name: '葬送のフリーレン',
-    creator: '山田鐘人',
-  },
-  {
-    name: 'ノーゲーム・ノーライフ No Game No Life',
-    creator: '榎宮祐',
-  },
-  {
-    name: 'Cyberpunk: Edgerunners',
-    creator: 'CD Projekt Red',
-  },
-  {
-    name: 'Fate/Zero',
-    creator: '虚淵玄',
-  },
-  {
-    name: 'ID:INVADED イド：インヴェイデッド',
-    creator: '舞城王太郎',
-  },
-  {
-    name: '咒術廻戦',
-    creator: '芥見下々',
-  },
-  {
-    name: 'Arcane',
-    creator: 'Riot Games',
-  },
-  {
-    name: '青春ブタ野郎シリーズ',
-    creator: '鴨志田一',
-  },
-  {
-    name: 'PSYCHO-PASS サイコパス',
-    creator: '虚淵玄',
-  },
-  {
-    name: 'デス・パレード Death Parade',
-    creator: '立川讓',
-  },
-  {
-    name: '血界戦線',
-    creator: '内藤泰弘',
-  },
-  {
-    name: '寄生獣',
-    creator: '岩明均',
+    name: 'Sing like no one is listening, love like you never been hurt, dance like no one is watching and live like it is heaven on earth.',
+    creator: 'Mark Twain',
   },
 
-  {
-    name: 'デュラララ!!',
-    creator: '成田良悟',
-  },
-  {
-    name: '鬼滅の刃',
-    creator: '吾峠呼世晴',
-  },
-  {
-    name: 'ブルーピリオド Blue Period',
-    creator: '山口飛翔',
-  },
-  {
-    name: 'ゾンビになるまでにしたい100のこと～',
-    creator: '麻生羽吕',
-  },
-  {
-    name: 'ヴァイオレット・エヴァーガーデン Violet Evergarden',
-    creator: '暁佳奈',
-  },
-  {
-    name: 'Steins;Gate',
-    creator: '林直孝',
-  },
-  {
-    name: '蟲師',
-    creator: '漆原友紀',
-  },
-  {
-    name: 'ダンダダン Dan Da Dan',
-    creator: '龍幸伸',
-  },
-  {
-    name: '冰菓',
-    creator: '米澤穗信',
-  },
-  {
-    name: 'Evangelion',
-    creator: '庵野秀明',
-  },
-  {
-    name: '四月は君の嘘',
-    creator: '新川直司',
-  },
-  {
-    name: 'やはり俺の青春ラブコメはまちがっている',
-    creator: '渡航',
-  },
-  {
-    name: '食戟のソーマ',
-    creator: '附田祐斗',
-  },
-  {
-    name: 'チェンソーマン Chainsaw Man',
-    creator: '藤本タツキ',
-  },
-  {
-    name: '賭ケグルイ',
-    creator: '河本焰',
-  },
-  {
-    name: 'ノラガミ 野良神',
-    creator: 'あだちとか',
-  },
-  {
-    name: '暗殺教室',
-    creator: '松井優征',
-  },
-  {
-    name: 'かぐや様は告らせたい',
-    creator: '赤坂アカ',
-  },
-  {
-    name: 'Re:ゼロから始める異世界生活',
-    creator: '長月達平',
-  },
-  {
-    name: 'ソードアート・オンライン Sword Art Online',
-    creator: '川原礫',
-  },
-  {
-    name: '進撃の巨人',
-    creator: '諫山創',
-  },
-  {
-    name: '一週間フレンズ',
-    creator: '葉月抹茶',
-  },
-  {
-    name: 'SPY x FAMILY',
-    creator: '遠藤達哉',
-  },
-  {
-    name: '東京喰種',
-    creator: '石田スイ',
-  },
-  {
-    name: '僕のヒーローアカデミア',
-    creator: '堀越耕平',
-  },
-  {
-    name: 'ワンパンマン One-Punch Man',
-    creator: 'ONE',
-  },
-  {
-    name: '時光代理人',
-    creator: '李豪凌',
-    lang: 'zh-cn',
-  },
-  {
-    name: '怪獣8号',
-    creator: '松本直也',
-  },
-  {
-    name: '虚構推理',
-    creator: '城平京',
-  },
-  {
-    name: '富豪刑事 Balance:UNLIMITED',
-    creator: '筒井康隆',
-  },
-  {
-    name: 'ダンジョン飯',
-    creator: '九井諒子',
-  },
-  {
-    name: 'Dr.STONE',
-    creator: '稻垣理一郎',
-  },
-  {
-    name: '無職転生',
-    creator: '理不尽な孫の手',
-  },
-  {
-    name: '映像研には手を出すな!',
-    creator: '大童澄瞳',
-  },
-  {
-    name: 'サマータイムレンダ Summer Time Rendering',
-    creator: '田中靖規',
-  },
-  {
-    name: 'アンデッドアンラック Undead Unluck',
-    creator: '戸塚慶文',
-  },
-  {
-    name: 'メイドインアビス Made in Abyss',
-    creator: 'つくしあきひと',
-  },
-  {
-    name: '推しの子',
-    creator: '赤坂アカ',
-  },
-  {
-    name: 'アカメが斬る!',
-    creator: 'タカヒロ',
-  },
-  {
-    name: '夏目友人帳',
-    creator: '緑川ゆき',
-  },
-  {
-    name: 'とある科学の超電磁砲',
-    creator: '鎌池和馬',
-  },
-  {
-    name: 'とらドラ!',
-    creator: '竹宮ゆゆこ',
-  },
-  {
-    name: 'とある魔術の禁書目録',
-    creator: '鎌池和馬',
-  },
-  {
-    name: '3月のライオン',
-    creator: '羽海野チカ',
-  },
-  {
-    name: 'ゆるキャン△',
-    creator: 'あfろ',
-  },
-  {
-    name: '宝石の国',
-    creator: '市川春子',
-  },
-  {
-    name: 'バクマン BAKUMAN',
-    creator: '大場つぐみ',
-  },
-  {
-    name: 'はたらく細胞',
-    creator: '清水茜',
-  },
-  {
-    name: '幼女戦記',
-    creator: 'ルロ・ゼン',
-  },
-  {
-    name: '化物語',
-    creator: '西尾維新',
-  },
-  {
-    name: 'Overlord',
-    creator: '丸山くがね',
-  },
-  {
-    name: '未来日記',
-    creator: 'えすのサカエ',
-  },
-  {
-    name: '転生したらスライムだった件',
-    creator: '伏瀬',
-  },
-  {
-    name: '僕らはみんな河合荘',
-    creator: '宮原るり',
-  },
-  {
-    name: '나 혼자만 레벨업 - 俺だけレベルアップな件',
-    creator: '추공',
-  },
 ]
 
-export const book: MediaRecord[] = [
+export const books: MediaRecord[] = [
   {
     name: 'Die with Zero',
     creator: 'Bill Perkins',
@@ -432,54 +167,6 @@ export const movie: MediaRecord[] = [
   {
     name: '好东西',
     creator: '邵艺辉',
-  },
-]
-
-export const drama: MediaRecord[] = [
-  {
-    name: 'グランメゾン東京 La Grande Maison Tokyo',
-  },
-  {
-    name: 'アンナチュラル Unnatural',
-  },
-  {
-    name: 'リーガル・ハイ LEGAL HIGH',
-  },
-  {
-    name: '今際の国のアリス Alice in Borderland',
-  },
-  {
-    name: '半沢直樹',
-  },
-  {
-    name: 'Silo',
-  },
-  {
-    name: 'The Last of Us',
-  },
-  {
-    name: 'Sherlock',
-  },
-  {
-    name: 'You',
-  },
-  {
-    name: 'The Queen\'s Gambit',
-  },
-  {
-    name: 'コンフィデンスマンJP',
-  },
-  {
-    name: 'One Piece',
-  },
-  {
-    name: 'Three Body',
-  },
-  {
-    name: 'Wednesday',
-  },
-  {
-    name: 'アンチヒーロー Anti Hero',
   },
 ]
 
@@ -959,10 +646,9 @@ export const song = [
 ]
 
 export const media: Record<MediaType, MediaRecord[]> = {
-  anime,
-  drama,
-  movie,
-  game,
-  song,
-  book,
+  quotes,
+  // movie,
+  books,
+  // game,
+  // song,
 }
