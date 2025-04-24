@@ -34,6 +34,8 @@ I'm always facinated by the representation of entire lifespan in finite grids, s
 Find me on
 
 <p flex="~ gap-2 wrap" class="mt--2!">
+  <a href="https://www.linkedin.com/in/bicheng-gu" target="_blank"><span op75 i-simple-icons-linkedin /> Linkedin </a>
+  <span op25> / </span>
   <a href="https://github.com/Bicheng-G" target="_blank"><span op75 i-simple-icons-github /> GitHub </a>
   <span op25> / </span>
   <a href="https://wa.me/6585882413" target="_blank"><span op75 i-simple-icons-whatsapp /> Whatsapp </a>
