@@ -42,10 +42,10 @@ const { y: scroll } = useWindowScroll()
           <span class="lt-md:hidden">Photos</span>
           <div i-ri-camera-3-line class="md:hidden" />
         </RouterLink>
-        <RouterLink to="/resume" title="Resume">
+        <a href="https://cv.bicheng.me" rel="noopener" title="Resume">
           <span class="lt-md:hidden">Resume<span i-ri-arrow-right-up-line /></span>
           <div i-ri-id-card-line class="md:hidden" />
-        </RouterLink>
+        </a>
         <ToggleTheme />
       </div>
     </nav>
