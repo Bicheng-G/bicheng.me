@@ -54,25 +54,12 @@ const rows = computed(() => {
   return result
 })
 
-// Auto scroll to current month on mobile
+// Keep refs for other functionality
 const gridRef = ref<HTMLElement | null>(null)
 const currentRef = ref<HTMLElement | null>(null)
 
 onMounted(() => {
-  nextTick(() => {
-    if (currentRef.value) {
-      if (window.innerWidth < 768) {
-        currentRef.value.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      }
-      else {
-        // For larger screens, just ensure it's visible
-        const rect = currentRef.value.getBoundingClientRect()
-        if (rect.top < 0 || rect.bottom > window.innerHeight) {
-          currentRef.value.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }
-      }
-    }
-  })
+  // Auto-scroll logic removed
 })
 
 // Function to bind ref conditionally
