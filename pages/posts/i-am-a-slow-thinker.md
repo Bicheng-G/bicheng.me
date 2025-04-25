@@ -21,6 +21,6 @@ Before reading this article, I was always bothered by my inability to handle inc
 
 This is particularly true in the workplace, especially when there are expectations for me to handle certain tasks under stress. Or when my boss has a very active mind, I often feel slow in the moment whenever they want to discuss something that just came into their mind, and I feel bad whenever I feel I've failed to contribute effectively to a productive discussion.
 
-![Tree sculpture by Kim Beaton](public/images/treetroll.jpg)
+![Tree sculpture by Kim Beaton](/images/treetroll.jpg)
 
 And now I know I am not alone or intellectually impaired or anything like that. It's about how external information is processed – fast or slow, deliberate or impulsive.
