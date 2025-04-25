@@ -22,9 +22,9 @@ Dreaming up cool ideas and making them come true is where my passion lies. I am 
 
 Off-screen, I enjoy photography and traveling, I post [photos on this page](/photos). Inspired by learning out loud, I write [blog posts](/posts) about self-actualization, metacognition, sciense-based-parenting, etc.
 
-I'm based in <a href="https://map.bicheng.me"><ruby lang="ja"><span i-ri-map-pin-line class="text-sm align-middle -translate-y-0.5" /> Singapore<rp>(</rp><rt></rt><rp>)</rp></ruby></a>, if you are around, please reach out and let's have some coffee or work together.
+I'm based in <a href="https://map.bicheng.me" target="_blank"><ruby lang="ja">Singapore<span i-ri-pushpin-line /><rp>(</rp><rt></rt><rp>)</rp></ruby></a>, if you are around, please reach out and let's have some coffee or work together.
 
-I'm always facinated by the representation of entire lifespan in finite grids, so I created one as a reminder to myself - <a href=""><ruby lang="ja">live at the moment<rp>(</rp><rt>活在当下</rt><rp>)</rp></ruby></a>.
+I'm always facinated by the representation of entire lifespan in finite grids, so I created one as a reminder to myself - <a href=""><ruby lang="ja">live in the moment<rp>(</rp><rt>活在当下</rt><rp>)</rp></ruby></a>.
 
 <div my-8 />
 <LifeInWeeks />
