@@ -16,4 +16,4 @@ I wanted to list them out, for myself, for share, or just for the record.
 
 <MediaConsumption />
 
-<div class="op50 mt-10">These are ones I enjoyed, not exhaustive. And not necessarily recommendations.</div>
+<div class="op50 mt-10">These are ones I enjoyed, not exhaustive.</div>
