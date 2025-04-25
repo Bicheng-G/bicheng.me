@@ -22,7 +22,7 @@ Dreaming up cool ideas and making them come true is where my passion lies. I am 
 
 Off-screen, I enjoy photography and traveling, I post [photos on this page](/photos). Inspired by learning out loud, I write [blog posts](/posts) about self-actualization, metacognition, sciense-based-parenting, etc.
 
-I'm based in <a href=""><ruby lang="ja"><span i-ri-map-pin-line class="text-sm align-middle -translate-y-0.5" /> Singapore<rp>(</rp><rt></rt><rp>)</rp></ruby></a>, if you are around, please reach out and let's have some coffee or work together.
+I'm based in <a href="https://map.bicheng.me"><ruby lang="ja"><span i-ri-map-pin-line class="text-sm align-middle -translate-y-0.5" /> Singapore<rp>(</rp><rt></rt><rp>)</rp></ruby></a>, if you are around, please reach out and let's have some coffee or work together.
 
 I'm always facinated by the representation of entire lifespan in finite grids, so I created one as a reminder to myself - <a href=""><ruby lang="ja">live at the moment<rp>(</rp><rt>活在当下</rt><rp>)</rp></ruby></a>.
 
@@ -43,7 +43,7 @@ Find me on
   <span op25> / </span>
   <a href="https://x.com/0xAilurus" target="_blank"><span op75 i-ri-twitter-x-fill /> Twitter </a>
   <span op25> / </span>
-  <a href="https://wa.me/6585882413?text=Hi%20Bicheng%2C%20I%20saw%20your%20blog%20and%20.." target="_blank"><span op75 i-simple-icons-whatsapp /> Whatsapp </a>
+  <a href="https://wa.me/6585882413?text=Hi%20Bicheng%2C%20I%20saw%20your%20blog%20and%20.." target="_blank"><span op75 i-simple-icons-whatsapp /> WhatsApp </a>
 </p>
 
 Or mail me at <span font-mono>hi<span i-carbon-at/>bicheng.me</span>
