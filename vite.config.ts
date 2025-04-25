@@ -126,7 +126,26 @@ export default defineConfig({
 
         md.use(MarkdownItMagicLink, {
           linksMap: {
-            'Elitetax Systems': 'https://elitetaxsystems.com',
+            'Soon Heng': {
+              link: 'https://www.soonhengtaxi.com.sg/',
+              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/sht.png', // or another image URL
+            },
+            'Elite CoPilot': {
+              link: 'https://elitetaxsystems.com/Solution-EliteCopilot',
+              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/elitetax-transparent.png',
+            },
+            'Pivox': {
+              link: 'https://www.pivox.com.sg/',
+              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/pivox.png',
+            },
+            'Elitetax Systems': {
+              link: 'https://elitetaxsystems.com',
+              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/elitetax-transparent.png',
+            },
+            // 'Financial Consultant': {
+            // link: 'https://www.financialconsultant.com.sg/',
+            // imageUrl: 'https://www.financialconsultant.com.sg/favicon.ico'
+            // },
             'Vitest': 'https://github.com/vitest-dev/vitest',
             'Slidev': 'https://github.com/slidevjs/slidev',
             'VueUse': 'https://github.com/vueuse/vueuse',
@@ -160,7 +179,6 @@ export default defineConfig({
             ['https://nuxtlabs.com', 'https://github.com/nuxtlabs.png'],
             [/opencollective\.com\/vite/, 'https://github.com/vitejs.png'],
             [/opencollective\.com\/elk/, 'https://github.com/elk-zone.png'],
-            // ['https://elitetaxsystems.com', 'https://imgur.com/a/ODOJZJS'],
           ],
         })
 

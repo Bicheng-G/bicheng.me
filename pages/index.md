@@ -7,9 +7,12 @@ art: random
 
 Hey! I'm Bicheng Gu, a pragmatic product manager well versed in business development.
 
-Working at {Elitetax Systems}<br>
+Working at {Elitetax Systems} {Soon Heng}<br>
+Incubating {Elite CoPilot} {Pivox}<br>
 
 <!--
+Freelance Certified {Financial Consultant}<br>
+
 Creator of {Vitest} {Slidev} {VueUse} {UnoCSS} {Elk} {Type Challenges}<br>
 Core team of {Vue} {Nuxt} {Vite}<br>
 Maintaining {Shiki} {Twoslash} {ESLint Stylistic}
@@ -17,7 +20,7 @@ Maintaining {Shiki} {Twoslash} {ESLint Stylistic}
 Dreaming up cool ideas and making them come true is where my passion lies. I am enthusiastic about building tools that help myself and others to be more productive and enjoy the process of crafting. You can find my [full projects list here](/projects).
 -->
 
-Off-screen, I enjoy doing photography and traveling. Inspired by learning out loud, I post [photos on this page](/photos). I write [blog posts](/posts) about open self-actualization, metacognition, sciense-based-parenting, etc.
+Off-screen, I enjoy photography and traveling, I post [photos on this page](/photos). Inspired by learning out loud, I write [blog posts](/posts) about open self-actualization, metacognition, sciense-based-parenting, etc.
 
 I'm based in <a href=""><ruby lang="ja"><span i-ri-map-pin-line class="text-sm align-middle -translate-y-0.5" /> Singapore<rp>(</rp><rt></rt><rp>)</rp></ruby></a>, if you are around, please reach out and let's have some coffee or work together.
 
