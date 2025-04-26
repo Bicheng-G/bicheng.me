@@ -44,7 +44,7 @@ const { y: scroll } = useWindowScroll()
         </RouterLink>
         <a href="https://cv.bicheng.me" rel="noopener" title="Resume">
           <span class="lt-md:hidden">Resume<span i-ri-arrow-right-up-line /></span>
-          <div i-ri-id-card-line class="md:hidden" />
+          <div class="md:hidden">cv</div>
         </a>
         <ToggleTheme />
       </div>

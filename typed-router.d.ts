@@ -30,10 +30,9 @@ declare module 'vue-router/auto-routes' {
     '/posts/color-scheme-for-vscode-ext': RouteRecordInfo<'/posts/color-scheme-for-vscode-ext', '/posts/color-scheme-for-vscode-ext', Record<never, never>, Record<never, never>>,
     '/posts/domain-email': RouteRecordInfo<'/posts/domain-email', '/posts/domain-email', Record<never, never>, Record<never, never>>,
     '/posts/i-am-a-slow-thinker': RouteRecordInfo<'/posts/i-am-a-slow-thinker', '/posts/i-am-a-slow-thinker', Record<never, never>, Record<never, never>>,
-    '/posts/icons-in-pure-css': RouteRecordInfo<'/posts/icons-in-pure-css', '/posts/icons-in-pure-css', Record<never, never>, Record<never, never>>,
-    '/posts/icons-in-pure-css-zh': RouteRecordInfo<'/posts/icons-in-pure-css-zh', '/posts/icons-in-pure-css-zh', Record<never, never>, Record<never, never>>,
     '/posts/photos-page': RouteRecordInfo<'/posts/photos-page', '/posts/photos-page', Record<never, never>, Record<never, never>>,
     '/posts/sliding-enter-animation': RouteRecordInfo<'/posts/sliding-enter-animation', '/posts/sliding-enter-animation', Record<never, never>, Record<never, never>>,
+    '/posts/sports-and-focus': RouteRecordInfo<'/posts/sports-and-focus', '/posts/sports-and-focus', Record<never, never>, Record<never, never>>,
     '/projects_underconstruct': RouteRecordInfo<'/projects_underconstruct', '/projects_underconstruct', Record<never, never>, Record<never, never>>,
     '/quotes': RouteRecordInfo<'/quotes', '/quotes', Record<never, never>, Record<never, never>>,
   }
