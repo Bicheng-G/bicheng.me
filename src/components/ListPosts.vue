@@ -24,6 +24,7 @@ const routes: Post[] = router.getRoutes()
     upcoming: i.meta.frontmatter.upcoming,
     redirect: i.meta.frontmatter.redirect,
     place: i.meta.frontmatter.place,
+    tags: i.meta.frontmatter.tags,
   }))
 
 const posts = computed(() =>
@@ -132,16 +133,9 @@ function getGroupName(p: Post) {
               <span v-if="route.duration" text-sm op40 ws-nowrap>· {{ route.duration }}</span>
               <span v-if="route.platform" text-sm op40 ws-nowrap>· {{ route.platform }}</span>
               <span v-if="route.place" text-sm op40 ws-nowrap md:hidden>· {{ route.place }}</span>
-              <span
-                v-if="route.lang === 'zh'"
-                align-middle flex-none
-                class="text-xs bg-zinc:15 text-zinc5 rounded px-1 py-0.5 my-auto md:hidden"
-              >中文</span>
-              <span
-                v-if="route.lang === 'ja'"
-                align-middle flex-none
-                class="text-xs bg-zinc:15 text-zinc5 rounded px-1 py-0.5 my-auto md:hidden"
-              >日本語</span>
+              <span v-if="route.tags?.[0]" text-sm op40 ws-nowrap>·
+                #{{ route.tags[0] }}
+              </span>
             </div>
           </li>
           <div v-if="route.place" op50 text-sm hidden mt--2 md:block>

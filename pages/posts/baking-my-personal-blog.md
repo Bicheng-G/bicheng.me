@@ -1,28 +1,29 @@
 ---
-title: The Making of My Personal Blog
+title: Baking My Personal Blog
+subtitle: This blog documents my journey from conception to deployment of my brand spanking new personal website. Let's extend a virtual high five to Cali Castle for open sourcing the awesome website project!
 date: 2023-07-16
 lang: en
 duration: 5min
-
+tags: [frontend, nextjs]
 ---
 
-This blog documents my journey from conception to deployment of my brand spanking new personal website. Let's extend a virtual high five to Cali Castle for open sourcing the awesome website project!
+[[toc]]
 
 # The Motivation
 
-The thought of having a personal blog started to sprout when the idea of learning in public began to germinate in my mind. To get the full scoop on this, check out my other blog post [![img](https://spot.bicheng.me/api/favicon?url=bicheng.me)Learn Out Loud](https://bicheng.me/blog/learning-out-loud-the-journey-of-learning-in-public). Before this, my digital presence was limited to a static portfolio site showcasing past projects - you know, the usual jazz. But it was as good at posting blogs as a mime is at karaoke.
+The thought of having a personal blog started to sprout when the idea of learning in public began to germinate in my mind. To get the full scoop on this, check out my other blog post [Learn Out Loud](https://bicheng.me/blog/learning-out-loud-the-journey-of-learning-in-public). Before this, my digital presence was limited to a static portfolio site showcasing past projects - you know, the usual jazz. But it was as good at posting blogs as a mime is at karaoke.
 
 In addition to that, I've always had a soft spot for frontend development. I consider myself a "visual beast" (sounds cooler than animal, don't you think?). Gorgeous designs tickle my fancy, and sites like dribbble are like a digital spa day for me.
 
 # The Start
 
-Even though I hadn't yet set the wheels in motion for a new personal site, I stumbled upon this awesome website designed by Cali Castle during one of my researches on frontend frameworks and chanced upon Cali's article [![img](https://spot.bicheng.me/api/favicon?url=cali.so)React or Vue My Take](https://cali.so/blog/react-or-vue-my-take-on-web-dev).
+Even though I hadn't yet set the wheels in motion for a new personal site, I stumbled upon this awesome website designed by Cali Castle during one of my researches on frontend frameworks and chanced upon Cali's article [React or Vue My Take](https://cali.so/blog/react-or-vue-my-take-on-web-dev).
 
 I was instantly blown away by the website design and found myself down a rabbit hole, exploring every nook and cranny. Eventually, I found a note at the footer stating "The website is open-sourced by Cali". Score!
 
 # The Process
 
-I ventured over to his GitHub repository. With zero understanding of how the site functioned, I shot over an issue asking him how to manage the blogs. And voila! The very next day, he published a comprehensive guide blog titled [![img](https://spot.bicheng.me/api/favicon?url=cali.so)Guide for Cloning My Site](https://cali.so/blog/guide-for-cloning-my-site). He also specifically addressed on how to handle the blog section.
+I ventured over to his GitHub repository. With zero understanding of how the site functioned, I shot over an issue asking him how to manage the blogs. And voila! The very next day, he published a comprehensive guide blog titled [Guide for Cloning My Site](https://cali.so/blog/guide-for-cloning-my-site). He also specifically addressed on how to handle the blog section.
 
 That was a jaw-dropper for me.
 
@@ -34,7 +35,7 @@ Without missing a beat, I spent the entire weekend building, debugging, deployin
 
 #### Domain
 
-Thanks to the perks from the [![img](https://spot.bicheng.me/api/favicon?url=education.github.com)Github Student Developer Pack](https://education.github.com/pack), I managed to get my domain and SSL certificate for free for a year from namecheap (Love a good bargain!).
+Thanks to the perks from the [Github Student Developer Pack](https://education.github.com/pack), I managed to get my domain and SSL certificate for free for a year from namecheap (Love a good bargain!).
 
 On a slightly unrelated note, I also discovered that my surname 'gu' is a top-level domain for Guam. Unfortunately, the price tag for _bicheng.gu_ made my wallet quiver in fear, so I decided to give it a pass (I might revisit it if I ever hit the 10,000 subscriber mark).
 

@@ -3,9 +3,8 @@ title: Leanring Out Loud
 date: 2023-07-16
 lang: en
 duration: 2min
+tags: [metacognition, learning]
 ---
-
-_"普信(pu xin)"_ is a internet slang in China, which translates to "ordinary yet confident." This term was initially conceived with a derogatory nuance, suggesting "What is there to be confident about when you are so ordinary?"
 
 # Learn In Public
 

@@ -3,6 +3,7 @@ title: I'm a Slow Thinker
 date: 2025-03-19
 lang: en
 duration: 2min
+tags: [self-actualization]
 ---
 
 > When a friend says something interesting to me, I usually don’t have a reaction until much later.

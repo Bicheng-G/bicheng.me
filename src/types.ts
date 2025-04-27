@@ -12,6 +12,7 @@ export interface Post {
   video?: boolean
   inperson?: boolean
   redirect?: string
+  tags?: string[]
 }
 
 export interface Talk {

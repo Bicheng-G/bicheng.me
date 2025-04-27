@@ -1,4 +1,7 @@
 <script setup lang='ts'>
+import { useEventListener } from '@vueuse/core'
+import { computed, defineAsyncComponent, onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router/auto'
 import { formatDate } from '~/logics'
 
 const { frontmatter } = defineProps({
@@ -105,7 +108,13 @@ const ArtComponent = computed(() => {
       v-if="frontmatter.date"
       class="opacity-50 !-mt-6 slide-enter-50"
     >
-      {{ formatDate(frontmatter.date, false) }} <span v-if="frontmatter.duration">· {{ frontmatter.duration }}</span>
+      {{ formatDate(frontmatter.date, false) }}
+      <span v-if="frontmatter.duration">· {{ frontmatter.duration }}</span>
+      <template v-if="frontmatter.tags?.length">
+        ·<span v-for="(tag) in frontmatter.tags" :key="tag" class="tag inline-flex items-center ml-1 bg-gray-400/25 dark:bg-white-500/30 hover:bg-gray-400/35 dark:hover:bg-white-500/50 transition-colors duration-300 px-2.5 py-0.5 rounded-full text-sm op90 hover:op100">
+          #{{ tag }}
+        </span>
+      </template>
     </p>
     <p v-if="frontmatter.place" class="mt--4!">
       <span op50>at </span>
@@ -120,6 +129,7 @@ const ArtComponent = computed(() => {
       v-if="frontmatter.subtitle"
       class="opacity-50 !-mt-6 italic slide-enter"
     >
+      <br>
       {{ frontmatter.subtitle }}
     </p>
     <p
