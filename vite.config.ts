@@ -132,7 +132,7 @@ export default defineConfig({
             },
             'Elite CoPilot': {
               link: 'https://elitetaxsystems.com/Solution-EliteCopilot',
-              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/elitetax-transparent.png',
+              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/elite_copilot.png',
             },
             'Pivox': {
               link: 'https://www.pivox.com.sg/',
