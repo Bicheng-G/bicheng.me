@@ -9,6 +9,7 @@ Hey! I'm Bicheng Gu, a pragmatic product manager well versed in business develop
 
 Working at {Elitetax Systems} {Soon Heng}<br>
 Incubating {Elite CoPilot} {Pivox}<br>
+Creator of {Pet Parents Club}<br>
 
 <!--
 Freelance Certified {Financial Consultant}<br>

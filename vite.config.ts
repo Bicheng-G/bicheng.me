@@ -142,6 +142,10 @@ export default defineConfig({
               link: 'https://elitetaxsystems.com',
               imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/elitetax-transparent.png',
             },
+            'Pet Parents Club': {
+              link: 'https://shopee.sg/petparentsclub',
+              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/ppc.png',
+            },
             // 'Financial Consultant': {
             // link: 'https://www.financialconsultant.com.sg/',
             // imageUrl: 'https://www.financialconsultant.com.sg/favicon.ico'
