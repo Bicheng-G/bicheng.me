@@ -12,6 +12,10 @@ export interface MediaRecord {
 
 export const quotes: MediaRecord[] = [
   {
+    name: 'Life shrinks or expands in proportion to one\'s courage.',
+    creator: 'Anias Nin',
+  },
+  {
     name: 'The most difficult thing is the decision to act. The rest is merely tenacity.',
     creator: 'Amelia Earhart',
   },
@@ -19,10 +23,37 @@ export const quotes: MediaRecord[] = [
     name: 'Sing like no one is listening, love like you never been hurt, dance like no one is watching and live like it is heaven on earth.',
     creator: 'Mark Twain',
   },
-
+  {
+    name: 'People often say that motivation doesn\'t last. Well, neither does bathing. That\'s why we recommend it daily. ',
+    creator: 'Zig Ziglar',
+  },
+  {
+    name: 'If you hear a voice within you say \“you cannot paint,\” then by all means paint and that voice will be silenced.',
+    creator: 'Vincent Van Gogh',
+  },
+  {
+    name: 'I am not a product of my circumstances. I am a product of my decisions.',
+    creator: 'Stephen Covey',
+  },
+  {
+    name: 'Strive not to be a success, but rather to be of value.',
+    creator: 'Albert Einstein',
+  },
 ]
 
 export const books: MediaRecord[] = [
+  {
+    name: 'How to Fail at Almost Everything and Still Win Big',
+    creator: 'Scotts Adams',
+  },
+  {
+    name: 'Zen and the Art of Motorcycle Maintenance',
+    creator: 'Robert M. Pirsig',
+  },
+  {
+    name: '被讨厌的勇气',
+    creator: '岸见一郎',
+  },
   {
     name: 'Die with Zero',
     creator: 'Bill Perkins',
