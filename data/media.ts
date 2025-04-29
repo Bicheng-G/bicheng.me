@@ -36,8 +36,20 @@ export const quotes: MediaRecord[] = [
     creator: 'Stephen Covey',
   },
   {
+    name: 'If you can\'t explain it simply, you don\'t understand it well enough.',
+    creator: 'Albert Einstein',
+  },
+  {
     name: 'Strive not to be a success, but rather to be of value.',
     creator: 'Albert Einstein',
+  },
+  {
+    name: 'Discussion is impossible with someone who claims not to seek the truth, but already to possess it.',
+    creator: 'Romain Rolland',
+  },
+  {
+    name: '一个人的性格决定他的际遇。如果你喜欢保持你的性格，那么，你就无权拒绝你的际遇。',
+    creator: '罗曼·罗兰',
   },
 ]
 
