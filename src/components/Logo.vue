@@ -28,8 +28,11 @@
 
           C148.673 105.666 142.28 79.7036 141.18 77.7826
         "
-      stroke="black" stroke-width="6.5"
-      stroke-linecap="round" stroke-linejoin="round"
+      stroke="currentColor"
+      stroke-width="6.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      fill="none"
     />
   </svg>
 </template>
@@ -67,15 +70,20 @@
     stroke-dasharray: 0 800px;
   }
 }
+
+:root {
+  --logo-color: #303030;
+}
+
+.dark {
+  --logo-color: #fdfdfd;
+}
+
 .path1 {
   stroke-dashoffset: 800px;
   stroke-dasharray: 800px 0;
   animation: grow 10s ease forwards infinite;
   transform-origin: center;
-  stroke: #303030;
-  animation-delay: 0s;
-}
-.dark .path1 {
-  stroke: #fdfdfd;
+  color: var(--logo-color);
 }
 </style>
