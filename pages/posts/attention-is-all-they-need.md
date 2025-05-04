@@ -3,7 +3,7 @@ title: Attention Is All They Need
 subtitle: The art of balancing your attention span among child, work and life.
 date: 2025-04-18
 lang: en
-duration: 2min
+duration: 3min
 tags: [parenting]
 ---
 
