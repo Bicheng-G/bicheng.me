@@ -12,21 +12,21 @@ Prerequisites:
 
 - A email service provider (recommend Gmail)
 - A email routing service (Cloudflare or Forward Email)
-- A SMTP serivce provider (Resend)
+- A SMTP service provider (Resend)
 
 ## Overview
 
-This set up is free of charge, with a limitation on numbers of email you can send with Resend's free plan (I remember they have recently increased to 3000 emails permonth, which is good enough for my usage). If you have more volume, I recommend you to subscribe to Google Workspace for simplicity and peace of mind.
+This set up is free of charge, with a limitation on numbers of email you can send with Resend's free plan (I remember they have recently increased to 3000 emails per month, which is good enough for my usage). If you have more volume, I recommend you to subscribe to Google Workspace for simplicity and peace of mind.
 
 I will briefly go through the role of each components in this setup:
 
-- Email routing service forwards all inbound email sent to `you@yourdomain.com` to your Gamil.
+- Email routing service forwards all inbound email sent to `you@yourdomain.com` to your Gmail.
 - SMTP service ito ensure the outbound email you send originate from `you@yourdomain.com`.
 - Lastly, the Gmail serves as the mailbox warehouse and UI for you to view and manage all the emails.
 
 ## Email Routing
 
-In Antfu's post, Forward Email is mentioned as a free and opensource option. But if you are using Cloudflare for your domain DNS, the good news is that Cloudflare has a native email routing support. To me, Cloudflare also has much more credibility, so why not?
+In Antfu's post, Forward Email is mentioned as a free and open-source option. But if you are using Cloudflare for your domain DNS, the good news is that Cloudflare has a native email routing support. To me, Cloudflare also has much more credibility, so why not?
 
 The setup process is simple, just go to the domain in Cloudflare, and look for Email Routing setting. Add the email you want to forward, i.e. `hi@yourdomain.com` amd the destination to forward i.e. your gmail.
 
