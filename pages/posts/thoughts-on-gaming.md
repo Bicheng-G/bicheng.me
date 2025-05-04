@@ -1,6 +1,6 @@
 ---
 title: Thoughts on Gaming
-date: 2025-05-04T12:37:30
+date: 2025-05-04T12:37:30+08:00
 lang: en
 duration: 2min
 tags: [parenting]
