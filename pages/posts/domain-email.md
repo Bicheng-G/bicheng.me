@@ -3,12 +3,12 @@ title: Domain Email
 date: 2025-05-03
 lang: en
 duration: 5min
-type: note
+tags: [tutorial, STMP, Email]
 ---
 
 Saw a [post from Antfu](https://antfu.me/posts/domain-email), about setting up his own domain for receiving emails. Yesterday, I've spend sometime to set up my domain email, and went further from there - using my own domain to both receive and sending emails.
 
-Prerequists:
+Prerequisites:
 
 - A email service provider (recommend Gmail)
 - A email routing service (Cloudflare or Forward Email)
@@ -34,13 +34,13 @@ And you are done for email routing.
 
 ## SMTP Server
 
-A SMTP server is basically a way for you to send email. While I was working on my previous project, I learn about Resend from [Cali's post](https://cali.so/blog/guide-for-cloning-my-site#f6ecf0edede3). It provides free tier for startup companies, and is definitely good enough for personal use.
+A SMTP server is basically a way for you to send email. While I was working on [my previous project](https://bicheng.me/posts/baking-my-personal-blog), I learn about Resend from [Cali's post](https://cali.so/blog/guide-for-cloning-my-site#f6ecf0edede3). It provides free tier for startup companies, and is definitely good enough for personal use.
 
 Let's head over to the Resend dashboard now to create and get our API key:
 
 1. Go to the Resend official website
-2. Sign up or Log in.
-3. Click on "Add an API Key".
+2. Sign up or Log in
+3. Click on "Add an API Key"
 4. Verify your domain
 
 It's that simple! Let's copy the API key - we'll need it later when configuring Gmail.
