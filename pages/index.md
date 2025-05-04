@@ -5,27 +5,21 @@ image: https://bicheng.me/og.png
 art: random
 ---
 
-Hey! I'm Bicheng Gu, a pragmatic product manager well versed in business development.
+Hey! I'm <a href=""><ruby lang="ja">Bicheng Gu<rp>(</rp><rt>必成 顾</rt><rp>)</rp></ruby></a>, a pragmatic product manager well versed in business development.
 
 Working at {Elitetax Systems} {Soon Heng}<br>
 Incubating {Elite CoPilot} {Pivox}<br>
 Creator of {Pet Parents Club}<br>
 
-<!--
-Freelance Certified {Financial Consultant}<br>
-
-Creator of {Vitest} {Slidev} {VueUse} {UnoCSS} {Elk} {Type Challenges}<br>
-Core team of {Vue} {Nuxt} {Vite}<br>
-Maintaining {Shiki} {Twoslash} {ESLint Stylistic}
-
-Dreaming up cool ideas and making them come true is where my passion lies. I am enthusiastic about building tools that help myself and others to be more productive and enjoy the process of crafting. You can find my [full projects list here](/projects).
--->
-
 Off-screen, I enjoy photography and traveling, I post [photos on this page](/photos). Inspired by learning out loud, I write [blog posts](/posts) about self-actualization, metacognition, sciense-based-parenting, etc.
 
 I'm based in <a href="https://map.bicheng.me" target="_blank"><ruby lang="ja">Singapore<span i-ri-pushpin-line /><rp>(</rp><rt></rt><rp>)</rp></ruby></a>, if you are around, please reach out and let's have some coffee or work together.
 
-I'm always facinated by the representation of entire lifespan in finite grids, so I created one as a reminder to myself - <a href=""><ruby lang="ja">live in the moment<rp>(</rp><rt>活在当下</rt><rp>)</rp></ruby></a>.
+<div mb-8>
+<PhotoGalleryHighlights />
+</div>
+
+I'm always fascinated by the representation of entire lifespan in finite grids, so I created one as a reminder to myself - <a href=""><ruby lang="ja">live in the moment<rp>(</rp><rt>活在当下</rt><rp>)</rp></ruby></a>.
 
 <div my-8 />
 <LifeInWeeks />
