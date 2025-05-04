@@ -51,10 +51,12 @@ Gmail basically uses it's own SMTP server to send your email, and now you need t
 
 To achieve this, you need to go to setting -> Accounts and Imports -> Send email as, and configure the SMTP Credentials as follows:
 
+```plain
 Host: smtp.resend.com
 Port: 25, 465, 587, 2465, or 2587 (recommend to use 465)
 Username: resend
 Password: YOUR_API_KEY
+```
 
 Click on save and you are done.
 

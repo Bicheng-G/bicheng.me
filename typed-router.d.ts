@@ -29,7 +29,6 @@ declare module 'vue-router/auto-routes' {
     '/posts/animated-svg-logo': RouteRecordInfo<'/posts/animated-svg-logo', '/posts/animated-svg-logo', Record<never, never>, Record<never, never>>,
     '/posts/attention-is-all-they-need': RouteRecordInfo<'/posts/attention-is-all-they-need', '/posts/attention-is-all-they-need', Record<never, never>, Record<never, never>>,
     '/posts/baking-my-personal-blog': RouteRecordInfo<'/posts/baking-my-personal-blog', '/posts/baking-my-personal-blog', Record<never, never>, Record<never, never>>,
-    '/posts/color-scheme-for-vscode-ext': RouteRecordInfo<'/posts/color-scheme-for-vscode-ext', '/posts/color-scheme-for-vscode-ext', Record<never, never>, Record<never, never>>,
     '/posts/domain-email': RouteRecordInfo<'/posts/domain-email', '/posts/domain-email', Record<never, never>, Record<never, never>>,
     '/posts/entering-a-new-field': RouteRecordInfo<'/posts/entering-a-new-field', '/posts/entering-a-new-field', Record<never, never>, Record<never, never>>,
     '/posts/fear': RouteRecordInfo<'/posts/fear', '/posts/fear', Record<never, never>, Record<never, never>>,
