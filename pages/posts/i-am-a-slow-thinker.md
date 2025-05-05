@@ -14,7 +14,7 @@ tags: [self-actualization]
 >
 > This probably makes me look [stupid](https://sive.rs/ss) in the moment, but I don’t mind. I’m not trying to win any debates.
 
-Extracted from Derek Sivers's article - [I’m a very slow thinker](https://sive.rs/slow).
+Extracted from {@sivers|Derek Sivers}'s article - [I’m a very slow thinker](https://sive.rs/slow).
 
 It was both interesting and shocking to see someone be so truthful about himself.
 

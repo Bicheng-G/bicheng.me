@@ -1,5 +1,5 @@
 ---
-title: Leanring Out Loud
+title: Learning Out Loud
 date: 2023-07-16
 lang: en
 duration: 2min
@@ -8,7 +8,7 @@ tags: [metacognition, learning]
 
 ## Learn In Public
 
-However, after becoming acquainted with the idea of "learn in public," I began to view this term in a new light. Even if you're ordinary, you can still exude confidence as long as you keep moving. You don't need to have secured a Gold Medal or made the Dean's list to be worthy of posting on LinkedIn, nor do you need to be a tech guru to answer questions on StackOverflow. Pick up from where they left, what sets you apart is your beginner's mindset. And that is crucial.
+Even if you're ordinary, you can still exude confidence as long as you keep moving. You don't need to have secured a Gold Medal or made the Dean's list to be worthy of posting on LinkedIn, nor do you need to be a tech guru to answer questions on StackOverflow. Pick up from where they left, what sets you apart is your beginner's mindset. And that is crucial.
 
 ## Show Your Work
 

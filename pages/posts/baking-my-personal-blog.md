@@ -11,13 +11,13 @@ tags: [tutorial, frontend, nextjs]
 
 ## The Motivation
 
-The thought of having a personal blog started to sprout when the idea of learning in public began to germinate in my mind. To get the full scoop on this, check out my other blog post [Learn Out Loud](https://bicheng.me/blog/learning-out-loud-the-journey-of-learning-in-public). Before this, my digital presence was limited to a static portfolio site showcasing past projects - you know, the usual jazz. But it was as good at posting blogs as a mime is at karaoke.
+The thought of having a personal blog started to sprout when the idea of learning in public began to germinate in my mind. To get the full scoop on this, check out my other blog post [Learn Out Loud](https://bicheng.me/posts/leanring-out-loud). Before this, my digital presence was limited to a static portfolio site showcasing past projects - you know, the usual jazz. But it was as good at posting blogs as a mime is at karaoke.
 
-In addition to that, I've always had a soft spot for frontend development. I consider myself a "visual beast" (sounds cooler than animal, don't you think?). Gorgeous designs tickle my fancy, and sites like dribbble are like a digital spa day for me.
+In addition to that, I've always had a soft spot for frontend development. I consider myself a "visual beast". Gorgeous designs tickle my fancy, and sites like dribbble are like a digital spa day for me.
 
 ## The Start
 
-Even though I hadn't yet set the wheels in motion for a new personal site, I stumbled upon this awesome website designed by Cali Castle during one of my researches on frontend frameworks and chanced upon Cali's article [React or Vue My Take](https://cali.so/blog/react-or-vue-my-take-on-web-dev).
+Even though I hadn't yet set the wheels in motion for a new personal site, I stumbled upon this awesome website designed by {@thecalicastle|Cali Castle}during one of my researches on frontend frameworks and chanced upon Cali's article [React or Vue My Take](https://cali.so/blog/react-or-vue-my-take-on-web-dev).
 
 I was instantly blown away by the website design and found myself down a rabbit hole, exploring every nook and cranny. Eventually, I found a note at the footer stating "The website is open-sourced by Cali". Score!
 
