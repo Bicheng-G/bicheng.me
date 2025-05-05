@@ -5,7 +5,7 @@ image: https://bicheng.me/og.png
 art: random
 ---
 
-Hey! I'm <a href=""><ruby lang="ja">Bicheng Gu<rp>(</rp><rt>必成 顾</rt><rp>)</rp></ruby></a>, a pragmatic product manager well versed in business development.
+Hey! I'm <span class="text-white"><ruby lang="ja">Bicheng Gu<rp>(</rp><rt>必成 顾</rt><rp>)</rp></ruby></span>, a pragmatic product manager well versed in business development.
 
 Working at {Elitetax Systems} {Soon Heng}<br>
 Incubating {Elite CoPilot} {Pivox}<br>
@@ -18,6 +18,10 @@ I'm based in <a href="https://map.bicheng.me" target="_blank"><ruby lang="ja">Si
 <div mb-8>
 <PhotoGalleryHighlights />
 </div>
+
+As an optimizer, I'm adept in polishing the product and refining the process.
+
+> Give me a v0 and a direct line to users, and I shall iterate it into the product users can't live without.
 
 I'm always fascinated by the representation of entire lifespan in finite grids, so I created one as a reminder to myself - <a href=""><ruby lang="ja">live in the moment<rp>(</rp><rt>活在当下</rt><rp>)</rp></ruby></a>.
 
