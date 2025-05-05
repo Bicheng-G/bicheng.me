@@ -45,4 +45,4 @@ Find me on
   <a href="https://wa.me/6585882413?text=Hi%20Bicheng%2C%20I%20saw%20your%20blog%20and%20.." target="_blank"><span op75 i-simple-icons-whatsapp /> WhatsApp </a>
 </p>
 
-Or mail me at <span font-mono>hi<span i-carbon-at/>bicheng.me</span>
+Or mail me at <TextCopy inline-block relative><span font-mono>hi<span i-carbon-at/><span absolute left=1 class="opacity-0">@</span>bicheng.me</span></TextCopy>

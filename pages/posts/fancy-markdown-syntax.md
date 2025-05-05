@@ -6,7 +6,7 @@ duration: 2min
 type: note
 ---
 
-Came across many cool implementations from Antfu's posts. Hence this note as a collection of the syntaxes for future reference.
+Came across many cool implementations from {@antfu|Anthony Fu}'s posts. Hence this note as a collection of the syntaxes for future reference.
 
 ## Insert Script
 
