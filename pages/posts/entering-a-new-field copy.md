@@ -14,7 +14,8 @@ The million things you thought you had to memorize are simply various combinatio
 
 ——A fantastic quote from John Reed, in his book ‘Succeeding’.
 
-<br />
+&nbsp;
+
 当你头一次开始研究一个领域的时候，似乎不得不把万千头绪都记在脑子里。
 
 其实大可不必，你需要做的只是辨别哪个领域同新的核心法则，一般只有3到12条。
@@ -23,7 +24,8 @@ The million things you thought you had to memorize are simply various combinatio
 
 ——John Reed
 
-<br />
+&nbsp;
+
 例如：
 
 减肥的核心法则 -> 管住嘴，迈开腿
