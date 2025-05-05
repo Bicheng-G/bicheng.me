@@ -5,7 +5,7 @@ image: https://bicheng.me/og.png
 art: random
 ---
 
-Hey! I'm <span class="text-[var(--fg-deep)] font-semibold"><ruby lang="ja">Bicheng Gu<rp>(</rp><rt>必成 顾</rt><rp>)</rp></ruby></span>, a pragmatic product manager well versed in business development.
+Hey! I'm <span class="text-[var(--fg-deep)]"><ruby lang="ja">Bicheng Gu<rp>(</rp><rt>必成 顾</rt><rp>)</rp></ruby></span>, a pragmatic product manager well versed in business development.
 
 Working at {Elitetax Systems} {Soon Heng}<br>
 Incubating {Elite CoPilot} {Pivox}<br>
