@@ -6,6 +6,8 @@ duration: 5min
 tags: [tutorial, smtp, email]
 ---
 
+[[toc]]
+
 Saw a [post from Antfu](https://antfu.me/posts/domain-email), about setting up his own domain for receiving emails. Yesterday, I've spend sometime to set up my domain email, and went further from there - using my own domain to both receive and sending emails.
 
 Prerequisites:

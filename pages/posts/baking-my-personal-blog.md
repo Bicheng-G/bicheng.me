@@ -17,7 +17,7 @@ In addition to that, I've always had a soft spot for frontend development. I con
 
 ## The Start
 
-Even though I hadn't yet set the wheels in motion for a new personal site, I stumbled upon this awesome website designed by {@thecalicastle|Cali Castle}during one of my researches on frontend frameworks and chanced upon Cali's article [React or Vue My Take](https://cali.so/blog/react-or-vue-my-take-on-web-dev).
+Even though I hadn't yet set the wheels in motion for a new personal site, I stumbled upon this awesome website designed by {@CaliCastle|Cali Castle}during one of my researches on frontend frameworks and chanced upon Cali's article [React or Vue My Take](https://cali.so/blog/react-or-vue-my-take-on-web-dev).
 
 I was instantly blown away by the website design and found myself down a rabbit hole, exploring every nook and cranny. Eventually, I found a note at the footer stating "The website is open-sourced by Cali". Score!
 
@@ -29,31 +29,31 @@ That was a jaw-dropper for me.
 
 Without missing a beat, I spent the entire weekend building, debugging, deploying, and possibly forgetting to sleep.
 
-### Technology Stacks Exposed
+## Technology Stacks Exposed
 
-#### Network
+### Network
 
-##### Domain
+#### Domain
 
 Thanks to the perks from the [Github Student Developer Pack](https://education.github.com/pack), I managed to get my domain and SSL certificate for free for a year from namecheap (Love a good bargain!).
 
 On a slightly unrelated note, I also discovered that my surname 'gu' is a top-level domain for Guam. Unfortunately, the price tag for _bicheng.gu_ made my wallet quiver in fear, so I decided to give it a pass (I might revisit it if I ever hit the 10,000 subscriber mark).
 
-##### DNS
+#### DNS
 
 DNS is like the switchboard operator for the domain. We add relevant A records or CNAME records in the DNS backend to guide the domain towards the website server.
 
-##### SSL certification
+#### SSL certification
 
 In this age of rampant cyber threats, setting up SSL certification is essential as we shift from the HTTP to the HTTPS protocol.
 
 It's not just about being on the cool kids' club with HTTPS. It also amps up the security and credibility of the website. Visitors to non-SSL certified sites often get security warnings from browsers, which can make them skedaddle faster than a cat in a bathtub.
 
-#### Frontend
+### Frontend
 
 I've always been mesmerized by cool frontend designs, snazzy illustrations, and smooth interactions. Building this new website was like having my own digital Lego set to play around with.
 
-##### pnpm
+#### pnpm
 
 pnpm is the package manager used in this project. It's like the backstage manager, handling all the packages required for the website.
 
@@ -61,7 +61,7 @@ pnpm is the package manager used in this project. It's like the backstage manage
 
 And finally, `pnpm build` checks if the project is ready to strut its stuff on the digital runway.
 
-##### Next.JS
+#### Next.JS
 
 Next.js is the framework used in the project. Think of it as your toolbox, packed with all the tools and components needed to build the website.
 
@@ -71,13 +71,13 @@ Next.js is the framework used in the project. Think of it as your toolbox, packe
 - public folder - These are the decorative stickers that jazz up your Lego model. It contains all the static resources, like images and fonts.
 - styles folder - This is like the color and shape of your Lego bricks. It contains all the style-related files like CSS.
 
-#### Serverless
+### Serverless
 
-##### Vercel
+#### Vercel
 
 Vercel is like the stage crew for developers, making it super easy to deploy and host web applications, static sites, and serverless functions. The cherry on top? Its git integration triggers automatic deployments every time you push changes to the repository. Smooth, right?
 
-##### Sanity
+#### Sanity
 
 Sanity is the CMS (Content Management System) used for this serverless project. It lets developers manage content from the backend separately from the frontend presentation. Plus, it offers a real-time editing experience for my blogs. Talk about sanity indeed!
 
