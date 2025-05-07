@@ -1,5 +1,5 @@
 ---
-title: Fancy Markdown Syntax
+title: Fancy Markdown Syntax For Vite
 date: 2025-05-05T16:00:00.000+08:00
 lang: en
 duration: 2min
