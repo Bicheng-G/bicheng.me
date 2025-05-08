@@ -35,12 +35,12 @@ function handleWheel(e: WheelEvent) {
     style="margin-left: calc(var(--prose-margin) * -1); padding-left: var(--prose-margin); padding-right: var(--prose-margin);"
     @wheel="handleWheel"
   >
-    <div v-for="(photo, idx) in photos" :key="idx" :lang="photo.lang">
+    <div v-for="photo, idx in photos" :key="idx" :lang="photo.lang">
       <img
         :src="photo.url"
         :alt="photo.text"
         :data-photo-index="idx"
-        :loading="idx === 0 ? 'eager' : 'lazy'"
+        loading="lazy"
         w-full aspect-square object-cover
         w-80 h-80 max-w-80 max-h-80 min-w-80 min-h-80
       >
