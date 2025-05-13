@@ -9,16 +9,16 @@
         // 1. 如果 URL 带 intro=1，就认为用户点了按钮，写标记，并清掉参数
         if (params.get('intro') === '1') {
           sessionStorage.setItem(KEY, 'true') // 使用 sessionStorage
-          history.replaceState(null, '', location.pathname + location.hash) // 保留 hash
+          history.replaceState(null, '', window.location.pathname + window.location.hash) // 保留 hash
           return
         }
 
-        // 2. 如果还没有标记过，就跳到引导页
-        if (!sessionStorage.getItem(KEY)) {
-          // 使用 sessionStorage
+        // 2. 如果还没有标记过，并且当前是首页，就跳到引导页
+        if (!sessionStorage.getItem(KEY) && window.location.pathname === '/') {
+          // 使用 sessionStorage 和检查路径
           location.replace('https://gu.bicheng.me') // 移除了末尾空格
         }
-        // 3. 否则（sessionStorage 有标记）就正常渲染主站内容
+        // 3. 否则（sessionStorage 有标记 或 不是首页）就正常渲染主站内容
       })()
     </script>
     <meta charset="UTF-8" />
