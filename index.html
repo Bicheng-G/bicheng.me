@@ -1,6 +1,26 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      ;(function () {
+        const KEY = 'seenIntro'
+        const params = new URLSearchParams(window.location.search)
+
+        // 1. 如果 URL 带 intro=1，就认为用户点了按钮，写标记，并清掉参数
+        if (params.get('intro') === '1') {
+          localStorage.setItem(KEY, 'true') // 使用 localStorage
+          history.replaceState(null, '', location.pathname + location.hash) // 保留 hash
+          return
+        }
+
+        // 2. 如果还没有标记过，就跳到引导页
+        if (!localStorage.getItem(KEY)) {
+          // 使用 localStorage
+          location.replace('https://gu.bicheng.me') // 移除了末尾空格
+        }
+        // 3. 否则（localStorage 有标记）就正常渲染主站内容
+      })()
+    </script>
     <meta charset="UTF-8" />
     <meta name="author" content="Bicheng Gu" />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
