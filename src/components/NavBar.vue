@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
 function toTop() {
   window.scrollTo({
     top: 0,
@@ -7,11 +10,22 @@ function toTop() {
 }
 
 const { y: scroll } = useWindowScroll()
+const route = useRoute()
+const isHomePage = computed(() => route.path === '/')
 </script>
 
 <template>
   <header class="header z-40">
+    <a
+      v-if="isHomePage"
+      href="https://gu.bicheng.me"
+      class="w-12 h-12 absolute xl:fixed m-5 select-none outline-none"
+      focusable="false"
+    >
+      <Logo />
+    </a>
     <RouterLink
+      v-else
       class="w-12 h-12 absolute xl:fixed m-5 select-none outline-none"
       to="/"
       focusable="false"
