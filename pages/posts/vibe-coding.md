@@ -3,8 +3,10 @@ title: Vibe Coding First Exp
 date: 2025-05-12T16:00:00.000+08:00
 lang: en
 duration: 2min
-type: note
+tags: [vibe coding, frontend]
 ---
+
+[[toc]]
 
 With a keen heart on building products, I always have strong interest in coding. Vibe coding make this a reality for me who does not have strong technology background. Recently, I have intensively used a few AI dev tools, namely:
 

@@ -35,6 +35,7 @@ declare module 'vue-router/auto-routes' {
     '/posts/fancy-markdown-syntax': RouteRecordInfo<'/posts/fancy-markdown-syntax', '/posts/fancy-markdown-syntax', Record<never, never>, Record<never, never>>,
     '/posts/fear': RouteRecordInfo<'/posts/fear', '/posts/fear', Record<never, never>, Record<never, never>>,
     '/posts/fear-zh': RouteRecordInfo<'/posts/fear-zh', '/posts/fear-zh', Record<never, never>, Record<never, never>>,
+    '/posts/frontend-redirect': RouteRecordInfo<'/posts/frontend-redirect', '/posts/frontend-redirect', Record<never, never>, Record<never, never>>,
     '/posts/i-am-a-slow-thinker': RouteRecordInfo<'/posts/i-am-a-slow-thinker', '/posts/i-am-a-slow-thinker', Record<never, never>, Record<never, never>>,
     '/posts/leanring-out-loud': RouteRecordInfo<'/posts/leanring-out-loud', '/posts/leanring-out-loud', Record<never, never>, Record<never, never>>,
     '/posts/photos-page': RouteRecordInfo<'/posts/photos-page', '/posts/photos-page', Record<never, never>, Record<never, never>>,
