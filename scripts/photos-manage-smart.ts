@@ -9,17 +9,24 @@ import { compressSharp } from './img-compress'
 
 const folder = fileURLToPath(new URL('../photos', import.meta.url))
 
-const files = (await fg('**/*.{jpg,png,jpeg}', {
+// Check if there are any unprocessed photos (not starting with 'p-')
+const unprocessedFiles = await fg('**/*.{jpg,png,jpeg}', {
   caseSensitiveMatch: false,
   absolute: true,
-  cwd: fileURLToPath(new URL('../photos', import.meta.url)),
-}))
-  .sort((a, b) => a.localeCompare(b))
+  cwd: folder,
+})
+  .then(files => files.filter(file => !basename(file).startsWith('p-')))
+
+if (unprocessedFiles.length === 0) {
+  console.log('✅ No new photos to process')
+  process.exit(0)
+}
+
+console.log(`📸 Found ${unprocessedFiles.length} new photos to process`)
+
+const files = unprocessedFiles.sort((a, b) => a.localeCompare(b))
 
 for (const filepath of files) {
-  if (basename(filepath).startsWith('p-')) {
-    continue
-  }
   let writepath = filepath
   let { ext } = parse(filepath.toLowerCase())
   if (ext === '.jpeg')
@@ -59,7 +66,7 @@ for (const filepath of files) {
   const { outBuffer, percent, outFile } = await compressSharp(img, buffer, filepath, writepath)
   if (outFile !== filepath || percent > -0.10) {
     await fs.writeFile(outFile, outBuffer)
-    console.log(`Processed: ${basename(filepath)} -> ${basename(outFile)}`)
+    console.log(`✅ Processed: ${basename(filepath)} -> ${basename(outFile)}`)
 
     // Automatically create WebP version
     const webpPath = outFile.replace(/\.(jpe?g|png)$/i, '.webp')
@@ -69,10 +76,10 @@ for (const filepath of files) {
         const webpImage = sharp(webpBuffer)
         const { outBuffer: webpOutBuffer } = await compressSharp(webpImage, webpBuffer, outFile, webpPath, { format: 'webp', quality: 85 })
         await fs.writeFile(webpPath, webpOutBuffer)
-        console.log(`Created WebP: ${basename(webpPath)}`)
+        console.log(`✅ Created WebP: ${basename(webpPath)}`)
       }
       catch (error) {
-        console.error(`Failed to create WebP for ${outFile}:`, error)
+        console.error(`❌ Failed to create WebP for ${outFile}:`, error)
       }
     }
   }
@@ -86,3 +93,5 @@ for (const filepath of files) {
     await fs.writeFile(outFile.replace(/\.\w+$/, '.json'), JSON.stringify({ text: title }, null, 2))
   }
 }
+
+console.log(`🎉 Successfully processed ${files.length} photos`)

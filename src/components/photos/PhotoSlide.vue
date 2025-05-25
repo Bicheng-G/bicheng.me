@@ -36,14 +36,18 @@ function handleWheel(e: WheelEvent) {
     @wheel="handleWheel"
   >
     <div v-for="photo, idx in photos" :key="idx" :lang="photo.lang">
-      <img
+      <OptimizedImage
         :src="photo.url"
-        :alt="photo.text"
+        :webp-src="photo.webpUrl"
+        :avif-src="photo.avifUrl"
+        :alt="photo.text || 'Photo'"
         :data-photo-index="idx"
-        loading="lazy"
-        w-full aspect-square object-cover
-        w-80 h-80 max-w-80 max-h-80 min-w-80 min-h-80
-      >
+        :loading="idx === 0 ? 'eager' : 'lazy'"
+        :fetchpriority="idx === 0 ? 'high' : 'auto'"
+        class="w-full aspect-square object-cover w-80 h-80 max-w-80 max-h-80 min-w-80 min-h-80"
+        width="320"
+        height="320"
+      />
       <div text-sm op75 mt2>
         {{ photo.text }}
       </div>

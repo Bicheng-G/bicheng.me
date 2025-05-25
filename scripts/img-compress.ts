@@ -4,7 +4,7 @@ import sharp from 'sharp'
 
 const maxSize = 1440
 
-export async function compressSharp(image: sharp.Sharp, inBuffer: Buffer, inFile: string, outFile: string) {
+export async function compressSharp(image: sharp.Sharp, inBuffer: Buffer, inFile: string, outFile: string, options: { format?: 'webp' | 'avif' | 'original', quality?: number } = {}) {
   const { format, width, height } = await image.metadata()
   if (!format)
     throw new Error(`Could not determine format of ${inFile}`)
@@ -16,12 +16,33 @@ export async function compressSharp(image: sharp.Sharp, inBuffer: Buffer, inFile
   if (width > maxSize || height > maxSize)
     image = image.resize(maxSize)
 
-  image = image[format]({
-    quality: format === 'png' ? 100 : 80,
-    compressionLevel: 9,
-  })
+  // Convert to modern format if specified
+  const targetFormat = options.format || format
+  const quality = options.quality || (targetFormat === 'webp' ? 85 : targetFormat === 'avif' ? 80 : format === 'png' ? 100 : 80)
 
-  const outBuffer = await image.withMetadata().toBuffer()
+  if (targetFormat === 'webp') {
+    image = image.webp({
+      quality,
+      effort: 6, // Higher effort for better compression
+    })
+    outFile = outFile.replace(/\.(jpe?g|png)$/i, '.webp')
+  }
+  else if (targetFormat === 'avif') {
+    image = image.avif({
+      quality,
+      effort: 9, // Maximum effort for AVIF
+    })
+    outFile = outFile.replace(/\.(jpe?g|png)$/i, '.avif')
+  }
+  else {
+    image = image[format]({
+      quality,
+      compressionLevel: 9,
+    })
+  }
+
+  // Auto-rotate based on EXIF orientation before converting, then strip metadata for smaller files
+  const outBuffer = await image.rotate().toBuffer()
   const size = inBuffer.byteLength
   const outSize = outBuffer.byteLength
 
@@ -37,11 +58,11 @@ export async function compressSharp(image: sharp.Sharp, inBuffer: Buffer, inFile
   }
 }
 
-export async function compressImages(files: string[]) {
+export async function compressImages(files: string[], options: { format?: 'webp' | 'avif' | 'original', quality?: number } = {}) {
   await Promise.all(files.map(async (file) => {
     const buffer = await fs.readFile(file)
     const image = sharp(buffer)
-    const { percent, size, outSize, inFile, outFile, outBuffer } = await compressSharp(image, buffer, file, file)
+    const { percent, size, outSize, inFile, outFile, outBuffer } = await compressSharp(image, buffer, file, file, options)
     if (percent > -0.10) {
       console.log(c.dim`[SKIP] ${bytesToHuman(size)} -> ${bytesToHuman(outSize)} ${(percent * 100).toFixed(1).padStart(5, ' ')}%  ${inFile}`)
     }

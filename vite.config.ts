@@ -255,7 +255,14 @@ export default defineConfig({
         if (warning.code !== 'UNUSED_EXTERNAL_IMPORT')
           next(warning)
       },
+      // Manual chunks removed due to SSR compatibility issues
     },
+    // Enable CSS code splitting
+    cssCodeSplit: true,
+    // Optimize chunk size
+    chunkSizeWarningLimit: 1000,
+    // Enable source maps for production debugging (optional)
+    sourcemap: false,
   },
 
   ssgOptions: {
