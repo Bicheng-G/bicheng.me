@@ -1,5 +1,22 @@
+/**
+ * Smart Photo Processor
+ *
+ * Processes photos with the following features:
+ * - Converts any format (JPG, PNG, HEIC) to optimized WebP
+ * - Extracts EXIF data for proper dating
+ * - Resizes large images (max 1440px)
+ * - Auto-rotates based on EXIF orientation
+ * - Renames with timestamp: p-2024-12-25-10-30-00-1.webp
+ * - Deletes original files (WebP-only strategy)
+ *
+ * Usage:
+ *   pnpm run photos        # Process only new photos
+ *   pnpm run photos:force  # Process all photos (re-process existing)
+ */
+
 import { existsSync } from 'node:fs'
 import fs from 'node:fs/promises'
+import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import ExifReader from 'exifreader'
 import fg from 'fast-glob'
@@ -9,22 +26,29 @@ import { compressSharp } from './img-compress'
 
 const folder = fileURLToPath(new URL('../photos', import.meta.url))
 
-// Check if there are any unprocessed photos (not starting with 'p-')
-const unprocessedFiles = await fg('**/*.{jpg,png,jpeg}', {
+// CLI option to force process all photos (not just unprocessed ones)
+const forceAll = process.argv.includes('--force')
+
+// Get files to process based on mode
+const allFiles = await fg('**/*.{jpg,png,jpeg,heic,JPG,PNG,JPEG,HEIC}', {
   caseSensitiveMatch: false,
   absolute: true,
   cwd: folder,
 })
-  .then(files => files.filter(file => !basename(file).startsWith('p-')))
 
-if (unprocessedFiles.length === 0) {
-  console.log('✅ No new photos to process')
+const filesToProcess = forceAll
+  ? allFiles
+  : allFiles.filter(file => !basename(file).startsWith('p-'))
+
+if (filesToProcess.length === 0) {
+  console.log('✅ No photos to process')
   process.exit(0)
 }
 
-console.log(`📸 Found ${unprocessedFiles.length} new photos to process`)
+const mode = forceAll ? 'all photos' : 'new photos'
+console.log(`📸 Found ${filesToProcess.length} ${mode} to process`)
 
-const files = unprocessedFiles.sort((a, b) => a.localeCompare(b))
+const files = filesToProcess.sort((a, b) => a.localeCompare(b))
 
 for (const filepath of files) {
   let writepath = filepath
@@ -63,34 +87,24 @@ for (const filepath of files) {
     index++
   writepath = join(folder, `${base}${index}${ext}`.toLowerCase())
 
-  const { outBuffer, percent, outFile } = await compressSharp(img, buffer, filepath, writepath)
-  if (outFile !== filepath || percent > -0.10) {
-    await fs.writeFile(outFile, outBuffer)
-    console.log(`✅ Processed: ${basename(filepath)} -> ${basename(outFile)}`)
+  // Convert directly to WebP with Sharp optimizations
+  const webpPath = writepath.replace(/\.(jpe?g|png|heic)$/i, '.webp')
+  const { outBuffer: webpBuffer, percent } = await compressSharp(img, buffer, filepath, webpPath, { format: 'webp', quality: 85 })
 
-    // Automatically create WebP version
-    const webpPath = outFile.replace(/\.(jpe?g|png)$/i, '.webp')
-    if (!existsSync(webpPath)) {
-      try {
-        const webpBuffer = await fs.readFile(outFile)
-        const webpImage = sharp(webpBuffer)
-        const { outBuffer: webpOutBuffer } = await compressSharp(webpImage, webpBuffer, outFile, webpPath, { format: 'webp', quality: 85 })
-        await fs.writeFile(webpPath, webpOutBuffer)
-        console.log(`✅ Created WebP: ${basename(webpPath)}`)
-      }
-      catch (error) {
-        console.error(`❌ Failed to create WebP for ${outFile}:`, error)
-      }
-    }
+  if (percent > -0.10) {
+    console.log(`✅ Processed: ${basename(filepath)} -> ${basename(webpPath)}`)
+    await fs.writeFile(webpPath, webpBuffer)
+  }
+  else {
+    console.log(`✅ Optimized: ${basename(filepath)} -> ${basename(webpPath)} (${(percent * 100).toFixed(1)}% reduction)`)
+    await fs.writeFile(webpPath, webpBuffer)
   }
 
-  // Clean up original file if it was renamed
-  if (outFile !== filepath) {
-    await fs.unlink(filepath)
-  }
+  // Always delete the original file (WebP-only strategy)
+  await fs.unlink(filepath)
 
   if (title) {
-    await fs.writeFile(outFile.replace(/\.\w+$/, '.json'), JSON.stringify({ text: title }, null, 2))
+    await fs.writeFile(webpPath.replace(/\.\w+$/, '.json'), JSON.stringify({ text: title }, null, 2))
   }
 }
 

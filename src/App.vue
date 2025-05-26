@@ -74,7 +74,7 @@ onKeyStroke('Escape', (e) => {
 </script>
 
 <template>
-  <ResourceHints />
+  <UnifiedPreloader />
   <NavBar />
   <main class="px-7 py-10 of-x-hidden">
     <RouterView />

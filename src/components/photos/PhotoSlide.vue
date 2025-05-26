@@ -35,21 +35,19 @@ function handleWheel(e: WheelEvent) {
     style="margin-left: calc(var(--prose-margin) * -1); padding-left: var(--prose-margin); padding-right: var(--prose-margin);"
     @wheel="handleWheel"
   >
-    <div v-for="photo, idx in photos" :key="idx" :lang="photo.lang">
-      <OptimizedImage
-        :src="photo.url"
-        :webp-src="photo.webpUrl"
-        :avif-src="photo.avifUrl"
-        :alt="photo.text || 'Photo'"
+    <div v-for="photo, idx in photos" :key="idx" :lang="photo?.lang">
+      <img
+        :src="photo?.url"
+        :alt="photo?.text || 'Photo'"
         :data-photo-index="idx"
         :loading="idx === 0 ? 'eager' : 'lazy'"
         :fetchpriority="idx === 0 ? 'high' : 'auto'"
         class="w-full aspect-square object-cover w-80 h-80 max-w-80 max-h-80 min-w-80 min-h-80"
         width="320"
         height="320"
-      />
+      >
       <div text-sm op75 mt2>
-        {{ photo.text }}
+        {{ photo?.text }}
       </div>
     </div>
   </div>

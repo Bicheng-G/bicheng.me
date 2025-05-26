@@ -6,8 +6,6 @@ export interface PhotoMate {
 export interface Photo extends PhotoMate {
   name: string
   url: string
-  webpUrl?: string
-  avifUrl?: string
 }
 
 const metaInfo = Object.entries(
@@ -23,51 +21,33 @@ const metaInfo = Object.entries(
   }
 })
 
-// Get all image files
+// Get all WebP image files (single format strategy)
 const allImages = Object.entries(
-  import.meta.glob<string>('./**/*.{jpg,png,JPG,PNG,webp,avif}', {
+  import.meta.glob<string>('./**/*.webp', {
     eager: true,
     query: '?url',
     import: 'default',
   }),
 )
 
-// Group images by base name (without extension)
-const imageGroups = new Map<string, { jpg?: string, png?: string, webp?: string, avif?: string }>()
+// Simple mapping since we only have WebP files
+const imageMap = new Map<string, string>()
 
 allImages.forEach(([path, url]) => {
-  const name = path.replace(/\.\w+$/, '').replace(/^\.\//, '')
-  const ext = path.split('.').pop()?.toLowerCase()
-
-  if (!imageGroups.has(name)) {
-    imageGroups.set(name, {})
-  }
-
-  const group = imageGroups.get(name)!
-  if (ext === 'jpg' || ext === 'jpeg')
-    group.jpg = url
-  else if (ext === 'png')
-    group.png = url
-  else if (ext === 'webp')
-    group.webp = url
-  else if (ext === 'avif')
-    group.avif = url
+  const name = path.replace(/\.webp$/, '').replace(/^\.\//, '')
+  imageMap.set(name, url)
 })
 
-const photos = Array.from(imageGroups.entries())
-  .map(([name, urls]): Photo => {
-    // Prefer original format as main URL, with modern formats as alternatives
-    const url = urls.jpg || urls.png || urls.webp || urls.avif || ''
-
+const photos = Array.from(imageMap.entries())
+  .map(([name, url]): Photo => {
+    const metadata = metaInfo.find(info => info.name === name)?.data || {}
     return {
-      ...metaInfo.find(info => info.name === name)?.data,
+      ...metadata,
       name,
       url,
-      webpUrl: urls.webp,
-      avifUrl: urls.avif,
     }
   })
-  .filter(photo => photo.url) // Only include photos with at least one format
+  .filter((photo): photo is Photo => Boolean(photo && photo.name && photo.url)) // Filter out any invalid photos
   .sort((a, b) => b.name.localeCompare(a.name))
 
 export default photos

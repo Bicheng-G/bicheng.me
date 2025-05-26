@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises'
+import process from 'node:process'
 import c from 'ansis'
 import sharp from 'sharp'
 
@@ -10,7 +11,7 @@ export async function compressSharp(image: sharp.Sharp, inBuffer: Buffer, inFile
     throw new Error(`Could not determine format of ${inFile}`)
   if (!width || !height)
     throw new Error(`Could not determine size of ${inFile}`)
-  if (format !== 'jpeg' && format !== 'png' && format !== 'webp')
+  if (!['jpeg', 'png', 'webp', 'heif'].includes(format))
     throw new Error(`Unsupported format ${format} of ${inFile}`)
 
   if (width > maxSize || height > maxSize)
@@ -34,10 +35,20 @@ export async function compressSharp(image: sharp.Sharp, inBuffer: Buffer, inFile
     })
     outFile = outFile.replace(/\.(jpe?g|png)$/i, '.avif')
   }
-  else {
-    image = image[format]({
+  else if (format === 'jpeg') {
+    image = image.jpeg({
       quality,
+    })
+  }
+  else if (format === 'png') {
+    image = image.png({
       compressionLevel: 9,
+    })
+  }
+  else {
+    // For HEIF or other formats, convert to JPEG as fallback
+    image = image.jpeg({
+      quality,
     })
   }
 
@@ -76,4 +87,20 @@ export async function compressImages(files: string[], options: { format?: 'webp'
 function bytesToHuman(size: number) {
   const i = Math.floor(Math.log(size) / Math.log(1024))
   return `${(size / 1024 ** i).toFixed(2)} ${['B', 'kB', 'MB', 'GB', 'TB'][i]}`.padStart(10, ' ')
+}
+
+// CLI functionality
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const files = process.argv.slice(2)
+  if (files.length === 0) {
+    console.log('Usage: tsx img-compress.ts <file1> <file2> ...')
+    console.log('       tsx img-compress.ts --webp <file1> <file2> ...')
+    process.exit(1)
+  }
+
+  const webpMode = files[0] === '--webp'
+  const filesToProcess = webpMode ? files.slice(1) : files
+  const options = webpMode ? { format: 'webp' as const, quality: 85 } : {}
+
+  compressImages(filesToProcess, options)
 }

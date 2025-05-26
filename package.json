@@ -10,9 +10,9 @@
     "redirects": "tsx scripts/redirects.ts",
     "lint": "eslint .",
     "compress": "tsx scripts/img-compress-staged.ts",
-    "compress:webp": "tsx scripts/convert-to-webp.ts",
     "photos": "tsx scripts/photos-manage-smart.ts",
-    "photos:force": "tsx scripts/photos-manage.ts",
+    "photos:force": "tsx scripts/photos-manage-smart.ts --force",
+    "compress:cli": "tsx scripts/img-compress.ts",
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
@@ -103,6 +103,6 @@
   },
   "lint-staged": {
     "*.{js,ts,vue}": "eslint --fix",
-    "photos/**/*.{jpg,jpeg,png}": "pnpm run photos"
+    "photos/**/*.{jpg,jpeg,png,heic,JPG,JPEG,PNG,HEIC}": "pnpm run photos"
   }
 }

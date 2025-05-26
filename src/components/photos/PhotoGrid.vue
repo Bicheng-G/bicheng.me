@@ -9,16 +9,14 @@ defineProps<{
 <template>
   <div class="photos grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" max-w-500 mx-auto>
     <div v-for="photo, idx in photos" :key="idx">
-      <OptimizedImage
+      <img
         :src="photo.url"
-        :webp-src="photo.webpUrl"
-        :avif-src="photo.avifUrl"
         :alt="photo.text || 'Photo'"
         :data-photo-index="idx"
         :loading="idx < 4 ? 'eager' : 'lazy'"
         :fetchpriority="idx === 0 ? 'high' : 'auto'"
         class="w-full aspect-square object-cover"
-      />
+      >
     </div>
   </div>
 </template>
