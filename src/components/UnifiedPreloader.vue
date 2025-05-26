@@ -14,11 +14,13 @@ const isDev = import.meta.env.DEV
 const cacheHits = ref(0)
 const totalNavigations = ref(0)
 const preloadedRoutes = ref<Set<string>>(new Set())
+const preloadedPhotos = ref<Set<string>>(new Set())
 
 // User behavior tracking
 const scrollProgress = ref(0)
 const timeOnPage = ref(0)
 const hasStartedBehavioralPreload = ref(false)
+const hasStartedPhotoPreload = ref(false)
 
 let startTime = Date.now()
 let scrollTimer: number | null = null
@@ -81,6 +83,56 @@ function prefetchRoute(routePath: string, reason: string) {
   }
 }
 
+// Preload photos (first 10 latest photos)
+async function preloadPhotos(reason: string) {
+  try {
+    // Dynamically import photos data
+    const photosModule = await import('../../photos/data')
+    const photos = photosModule.default
+
+    // Get first 10 photos (already sorted by timestamp descending)
+    const photosToPreload = photos.slice(0, 10)
+
+    if (isDev) {
+      // eslint-disable-next-line no-console
+      console.log(`📸 Starting photo prefetch: ${photosToPreload.length} photos (${reason}) - will be cached for any future navigation`)
+    }
+
+    // Preload photos with staggered timing to avoid overwhelming the browser
+    photosToPreload.forEach((photo: any, index: number) => {
+      setTimeout(() => {
+        // Check if already preloaded
+        if (preloadedPhotos.value.has(photo.url))
+          return
+
+        // Create prefetch link for image (less aggressive than preload, better for future navigation)
+        const link = document.createElement('link')
+        link.rel = 'prefetch'
+        link.href = photo.url
+        link.as = 'image'
+        // Add crossorigin to avoid CORS issues and improve caching
+        link.crossOrigin = 'anonymous'
+        document.head.appendChild(link)
+
+        preloadedPhotos.value.add(photo.url)
+
+        if (isDev) {
+          // eslint-disable-next-line no-console
+          console.log(`📷 Prefetched photo ${index + 1}/10: ${photo.name} (${reason}) - cached for future navigation`)
+        }
+      }, index * 150) // Stagger by 150ms to be gentle on bandwidth
+    })
+
+    return true
+  }
+  catch (error) {
+    if (isDev) {
+      console.warn(`⚠️ Failed to preload photos:`, error)
+    }
+    return false
+  }
+}
+
 // Get prefetch targets based on current route and behavior
 function getPrefetchTargets() {
   const targets: Array<{ route: string, priority: number }> = []
@@ -135,6 +187,57 @@ function executePrefetching(reason: string) {
   })
 }
 
+// Home page specific: preload photos after page is fully rendered
+function startHomePagePhotoPreloading() {
+  if (route.path !== '/' || hasStartedPhotoPreload.value)
+    return
+
+  hasStartedPhotoPreload.value = true
+
+  // Multiple strategies to detect when home page is fully rendered
+  const startPhotoPreloading = () => {
+    if (isDev) {
+      // eslint-disable-next-line no-console
+      console.log('🏠 Home page fully loaded, starting photo preloading...')
+    }
+    preloadPhotos('home-page-loaded')
+  }
+
+  // Strategy 1: After page is fully loaded and all images are rendered
+  if (document.readyState === 'complete') {
+    // Wait a bit more to ensure all components are rendered
+    setTimeout(startPhotoPreloading, 800)
+  }
+  else {
+    window.addEventListener('load', () => setTimeout(startPhotoPreloading, 800), { once: true })
+  }
+
+  // Strategy 2: Use intersection observer to detect when main content is visible
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.8) {
+        setTimeout(startPhotoPreloading, 500)
+        observer.disconnect()
+      }
+    })
+  }, { threshold: 0.8 })
+
+  // Observe the main content area
+  setTimeout(() => {
+    const mainContent = document.querySelector('main')
+    if (mainContent) {
+      observer.observe(mainContent)
+    }
+  }, 100)
+
+  // Strategy 3: Fallback after 2 seconds
+  setTimeout(() => {
+    if (!hasStartedPhotoPreload.value) {
+      startPhotoPreloading()
+    }
+  }, 2000)
+}
+
 // Post-load prefetching (zero impact on initial load)
 function startPostLoadPrefetching() {
   if (hasStartedBehavioralPreload.value)
@@ -150,12 +253,12 @@ function startPostLoadPrefetching() {
     executePrefetching('post-load')
   }
 
-  // Strategy 1: After page is fully loaded
+  // Strategy 1: After page is fully loaded (aligned with photo preloading timing)
   if (document.readyState === 'complete') {
-    setTimeout(startPrefetching, 500)
+    setTimeout(startPrefetching, 800)
   }
   else {
-    window.addEventListener('load', () => setTimeout(startPrefetching, 500), { once: true })
+    window.addEventListener('load', () => setTimeout(startPrefetching, 800), { once: true })
   }
 
   // Strategy 2: On user engagement
@@ -235,6 +338,11 @@ onMounted(() => {
   // Start post-load prefetching
   startPostLoadPrefetching()
 
+  // Start home page photo preloading if on home page
+  if (route.path === '/') {
+    startHomePagePhotoPreloading()
+  }
+
   // Setup behavioral tracking
   window.addEventListener('scroll', updateScrollProgress, { passive: true })
   timeTimer = window.setInterval(updateTimeOnPage, 5000)
@@ -258,9 +366,17 @@ router.beforeEach((to) => {
 
 router.afterEach(() => {
   hasStartedBehavioralPreload.value = false
+  hasStartedPhotoPreload.value = false
   scrollProgress.value = 0
   timeOnPage.value = 0
   startTime = Date.now()
+
+  // Start home page photo preloading if navigating to home page
+  if (route.path === '/') {
+    setTimeout(() => {
+      startHomePagePhotoPreloading()
+    }, 100)
+  }
 })
 
 // Add critical resource hints
@@ -273,8 +389,10 @@ if (isDev) {
   ;(window as any).__preloadingMetrics = {
     getCacheHitRate: () => totalNavigations.value > 0 ? (cacheHits.value / totalNavigations.value * 100).toFixed(1) : '0',
     getPreloadedRoutes: () => Array.from(preloadedRoutes.value),
+    getPreloadedPhotos: () => Array.from(preloadedPhotos.value),
     getTotalNavigations: () => totalNavigations.value,
     getCacheHits: () => cacheHits.value,
+    getPhotoPreloadCount: () => preloadedPhotos.value.size,
   }
 }
 </script>
@@ -282,12 +400,14 @@ if (isDev) {
 <template>
   <!-- Development-only performance indicator -->
   <div
-    v-if="isDev && totalNavigations > 0"
+    v-if="isDev && (totalNavigations > 0 || preloadedPhotos.size > 0)"
     class="fixed bottom-20 right-3 bg-black/80 text-white text-xs px-2 py-1 rounded z-50 font-mono"
     style="font-size: 10px;"
   >
     Cache: {{ totalNavigations > 0 ? (cacheHits / totalNavigations * 100).toFixed(1) : '0' }}%
     <br>
     Nav: {{ totalNavigations }}
+    <br>
+    Photos: {{ preloadedPhotos.size }}
   </div>
 </template>
