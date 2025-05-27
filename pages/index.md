@@ -5,6 +5,13 @@ image: https://bicheng.me/og.png
 art: random
 ---
 
+<script setup>
+import { defineAsyncComponent } from 'vue'
+
+// Lazy load the LifeInWeeks component since it's at the bottom and not critical
+const LifeInWeeksLazy = defineAsyncComponent(() => import('../src/components/LifeInWeeks.vue'))
+</script>
+
 Hey! I'm <span class="text-[var(--fg-deeper)]"><ruby lang="ja">Bicheng Gu<rp>(</rp><rt>必成 顾</rt><rp>)</rp></ruby></span>, a pragmatic product manager well versed in business development.
 
 Working at {Elitetax Systems} {Soon Heng}<br>
@@ -26,7 +33,14 @@ As an optimizer, I'm adept in polishing the product and refining the process.
 I'm always fascinated by the representation of entire lifespan in finite grids, so I created one as a reminder to myself - <span class="text-[var(--fg-deeper)]"><ruby lang="ja">live in the moment<rp>(</rp><rt>活在当下</rt><rp>)</rp></ruby></span>.
 
 <div my-8 />
-<LifeInWeeks />
+<ClientOnly>
+  <LifeInWeeksLazy />
+  <template #fallback>
+    <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-600">
+      <div class="animate-pulse">Loading life visualization...</div>
+    </div>
+  </template>
+</ClientOnly>
 <div my-8 />
 
 <div flex-auto />

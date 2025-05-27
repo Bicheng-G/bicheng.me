@@ -90,12 +90,13 @@ async function preloadPhotos(reason: string) {
     const photosModule = await import('../../photos/data')
     const photos = photosModule.default
 
-    // Get first 10 photos (already sorted by timestamp descending)
-    const photosToPreload = photos.slice(0, 10)
+    // Get first 6 photos (already sorted by timestamp descending)
+    // Reduced from 10 to 6 for better performance and bandwidth optimization
+    const photosToPreload = photos.slice(0, 6)
 
     if (isDev) {
       // eslint-disable-next-line no-console
-      console.log(`📸 Starting photo prefetch: ${photosToPreload.length} photos (${reason}) - will be cached for any future navigation`)
+      console.log(`📸 Starting photo prefetch: ${photosToPreload.length} photos (${reason}) - optimized for above-the-fold content`)
     }
 
     // Preload photos with staggered timing to avoid overwhelming the browser
@@ -118,7 +119,7 @@ async function preloadPhotos(reason: string) {
 
         if (isDev) {
           // eslint-disable-next-line no-console
-          console.log(`📷 Prefetched photo ${index + 1}/10: ${photo.name} (${reason}) - cached for future navigation`)
+          console.log(`📷 Prefetched photo ${index + 1}/6: ${photo.name} (${reason}) - cached for future navigation`)
         }
       }, index * 150) // Stagger by 150ms to be gentle on bandwidth
     })

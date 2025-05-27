@@ -13,6 +13,7 @@
     "photos": "tsx scripts/photos-manage-smart.ts",
     "photos:force": "tsx scripts/photos-manage-smart.ts --force",
     "compress:cli": "tsx scripts/img-compress.ts",
+    "analyze:icons": "tsx scripts/analyze-icons.ts",
     "prepare": "simple-git-hooks"
   },
   "dependencies": {

@@ -255,14 +255,69 @@ export default defineConfig({
         if (warning.code !== 'UNUSED_EXTERNAL_IMPORT')
           next(warning)
       },
-      // Manual chunks removed due to SSR compatibility issues
+      // Optimize CSS and JS chunking for better loading performance
+      output: {
+        // Split CSS by entry points to reduce initial bundle size
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name?.endsWith('.css')) {
+            // Create separate CSS files for different parts of the app
+            if (assetInfo.name.includes('index'))
+              return 'assets/critical-[hash][extname]'
+            return 'assets/[name]-[hash][extname]'
+          }
+          return 'assets/[name]-[hash][extname]'
+        },
+        // Better chunk splitting for JavaScript - using function to avoid SSR conflicts
+        manualChunks(id) {
+          // Only apply manual chunking in client build, not SSR
+          if (id.includes('node_modules')) {
+            // Core Vue ecosystem
+            if (id.includes('vue') || id.includes('vue-router')) {
+              return 'vendor-vue'
+            }
+            // UI and utility libraries
+            if (id.includes('@vueuse') || id.includes('floating-vue')) {
+              return 'vendor-ui'
+            }
+            // Content processing (markdown, syntax highlighting)
+            if (id.includes('shiki') || id.includes('markdown') || id.includes('prism')) {
+              return 'vendor-content'
+            }
+            // UnoCSS and styling
+            if (id.includes('unocss') || id.includes('@unocss') || id.includes('postcss')) {
+              return 'vendor-css'
+            }
+            // Icon libraries (often large)
+            if (id.includes('@iconify') || id.includes('iconify')) {
+              return 'vendor-icons'
+            }
+            // Date/time libraries
+            if (id.includes('dayjs') || id.includes('date-fns')) {
+              return 'vendor-utils'
+            }
+            // Large utility libraries
+            if (id.includes('lodash') || id.includes('ramda') || id.includes('rxjs')) {
+              return 'vendor-utils'
+            }
+            // Everything else goes to vendor (should be much smaller now)
+            return 'vendor'
+          }
+        },
+      },
     },
-    // Enable CSS code splitting
+    // Enable CSS code splitting more aggressively
     cssCodeSplit: true,
-    // Optimize chunk size
-    chunkSizeWarningLimit: 1000,
+    // Optimize chunk size for better loading
+    chunkSizeWarningLimit: 600, // Increased slightly to accommodate icon libraries
     // Enable source maps for production debugging (optional)
     sourcemap: false,
+    // Optimize CSS minification
+    cssMinify: 'esbuild',
+    // Enable asset inlining for small files
+    assetsInlineLimit: 2048, // Inline assets smaller than 2KB
+    // Additional optimizations
+    minify: 'esbuild', // Use esbuild for faster minification
+    target: 'es2020', // Modern target for better optimization
   },
 
   ssgOptions: {
