@@ -42,7 +42,7 @@ function slug(name: string) {
         >
           <div
             i-ph-cow-duotone
-            group-hover="i-ph-cow-duotone-fill text-lime"
+            group-hover="i-ph-cow-fill text-lime"
           />
           Yak Map
         </a>

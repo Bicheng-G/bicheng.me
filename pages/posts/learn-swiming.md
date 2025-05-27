@@ -1,7 +1,7 @@
 ---
 title: 记游泳
 date: 2025-05-17T16:00:00.000+08:00
-lang: en
+lang: zh
 duration: 4min
 tags: [learning, metacognition]
 ---

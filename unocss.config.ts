@@ -136,7 +136,7 @@ export default defineConfig({
 
     // Phosphor icons
     'i-ph-cow-duotone',
-    'i-ph-cow-duotone-fill',
+    'i-ph-cow-fill',
     'i-ph-github-logo-duotone',
     'i-ph-github-logo-fill',
     'i-ph-hand-heart-duotone',
