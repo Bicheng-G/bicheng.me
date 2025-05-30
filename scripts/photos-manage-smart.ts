@@ -20,6 +20,7 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import ExifReader from 'exifreader'
 import fg from 'fast-glob'
+import heicConvert from 'heic-convert'
 import { basename, join, parse } from 'pathe'
 import sharp from 'sharp'
 import { compressSharp } from './img-compress'
@@ -57,7 +58,27 @@ for (const filepath of files) {
   let { ext } = parse(filepath.toLowerCase())
   if (ext === '.jpeg')
     ext = '.jpg'
-  const buffer = await fs.readFile(filepath)
+
+  let buffer = await fs.readFile(filepath)
+
+  // Convert HEIC files to JPEG first
+  if (ext === '.heic') {
+    try {
+      console.log(`🔄 Converting HEIC: ${basename(filepath)}`)
+      const jpegBuffer = await heicConvert({
+        buffer: new Uint8Array(buffer) as any,
+        format: 'JPEG',
+        quality: 1,
+      })
+      buffer = Buffer.from(jpegBuffer)
+      ext = '.jpg'
+    }
+    catch (error) {
+      console.error(`❌ Failed to convert HEIC ${basename(filepath)}:`, error instanceof Error ? error.message : String(error))
+      continue
+    }
+  }
+
   const img = await sharp(buffer)
   const exif = await ExifReader.load(buffer)
 
