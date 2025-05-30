@@ -50,6 +50,8 @@ console.log(`📸 Found ${filesToProcess.length} ${mode} to process`)
 
 const files = filesToProcess.sort((a, b) => a.localeCompare(b))
 
+let processedCount = 0
+
 for (const filepath of files) {
   let writepath = filepath
   let { ext } = parse(filepath.toLowerCase())
@@ -73,13 +75,6 @@ for (const filepath of files) {
       return '-'
     return x
   }))
-
-  const timeDiff = Date.now() - +date
-  // 1 hour
-  if (timeDiff < 1000 * 60 * 60) {
-    console.warn(`Date of ${filepath} is too recent: ${dateRaw}`)
-    continue
-  }
 
   const base = `p-${date.toISOString().replace(/[:.a-z]+/gi, '-')}`
   let index = 1
@@ -106,6 +101,13 @@ for (const filepath of files) {
   if (title) {
     await fs.writeFile(webpPath.replace(/\.\w+$/, '.json'), JSON.stringify({ text: title }, null, 2))
   }
+
+  processedCount++
 }
 
-console.log(`🎉 Successfully processed ${files.length} photos`)
+if (processedCount === 0) {
+  console.log('⏭️  No photos were processed (all were too recent or already processed)')
+}
+else {
+  console.log(`🎉 Successfully processed ${processedCount} photos`)
+}
