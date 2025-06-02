@@ -8,6 +8,9 @@ tags: [tutorial, smtp, email]
 
 [[toc]]
 
+> [!TIP] Update
+> 3 June 2025: Migrated to iCloud custom domain email for simplicity
+
 Saw a [post from Antfu](https://antfu.me/posts/domain-email), about setting up his own domain for receiving emails. Yesterday, I've spend sometime to set up my domain email, and went further from there - using my own domain to both receive and sending emails.
 
 Prerequisites:
