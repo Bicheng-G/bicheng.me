@@ -1,4 +1,4 @@
-<!-- Unified Preloader - Combines all preloading strategies -->
+<!-- Unified Preloader - Performance-Optimized Balance -->
 <script setup lang="ts">
 import { useHead } from '@unhead/vue'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
@@ -22,9 +22,10 @@ const timeOnPage = ref(0)
 const hasStartedBehavioralPreload = ref(false)
 const hasStartedPhotoPreload = ref(false)
 
+// Minimal state management - no overhead
 let startTime = Date.now()
-let scrollTimer: number | null = null
-let timeTimer: number | null = null
+let scrollTimer: ReturnType<typeof setTimeout> | null = null
+let timeTimer: ReturnType<typeof setInterval> | null = null
 
 // Critical resources that should always be loaded
 const criticalLinks = computed(() => [
@@ -52,7 +53,7 @@ const criticalLinks = computed(() => [
   { rel: 'preconnect' as const, href: 'https://cv.bicheng.me' },
 ])
 
-// Smart prefetch based on current route and user behavior
+// Lightweight prefetch - keep it simple and fast
 function prefetchRoute(routePath: string, reason: string) {
   try {
     // Check if already prefetched
@@ -83,35 +84,33 @@ function prefetchRoute(routePath: string, reason: string) {
   }
 }
 
-// Preload photos (first 10 latest photos)
+// Optimized photo preloading - single strategy, minimal overhead
 async function preloadPhotos(reason: string) {
   try {
-    // Dynamically import photos data
+    // Simple dynamic import
     const photosModule = await import('../../photos/data')
     const photos = photosModule.default
 
     // Get first 6 photos (already sorted by timestamp descending)
-    // Reduced from 10 to 6 for better performance and bandwidth optimization
     const photosToPreload = photos.slice(0, 6)
 
     if (isDev) {
       // eslint-disable-next-line no-console
-      console.log(`📸 Starting photo prefetch: ${photosToPreload.length} photos (${reason}) - optimized for above-the-fold content`)
+      console.log(`📸 Starting photo prefetch: ${photosToPreload.length} photos (${reason})`)
     }
 
-    // Preload photos with staggered timing to avoid overwhelming the browser
+    // Simple staggered preloading - no complex promises or tracking
     photosToPreload.forEach((photo: any, index: number) => {
       setTimeout(() => {
         // Check if already preloaded
         if (preloadedPhotos.value.has(photo.url))
           return
 
-        // Create prefetch link for image (less aggressive than preload, better for future navigation)
+        // Create prefetch link for image
         const link = document.createElement('link')
         link.rel = 'prefetch'
         link.href = photo.url
         link.as = 'image'
-        // Add crossorigin to avoid CORS issues and improve caching
         link.crossOrigin = 'anonymous'
         document.head.appendChild(link)
 
@@ -119,9 +118,9 @@ async function preloadPhotos(reason: string) {
 
         if (isDev) {
           // eslint-disable-next-line no-console
-          console.log(`📷 Prefetched photo ${index + 1}/6: ${photo.name} (${reason}) - cached for future navigation`)
+          console.log(`📷 Prefetched photo ${index + 1}/6: ${photo.name} (${reason})`)
         }
-      }, index * 150) // Stagger by 150ms to be gentle on bandwidth
+      }, index * 250) // Reduced from 300ms to 250ms for better performance
     })
 
     return true
@@ -177,134 +176,83 @@ function getPrefetchTargets() {
   return targets.sort((a, b) => a.priority - b.priority)
 }
 
-// Execute prefetching with staggered timing
+// Simple prefetching execution - keep it lightweight
 function executePrefetching(reason: string) {
   const targets = getPrefetchTargets()
 
   targets.forEach((target, index) => {
     setTimeout(() => {
       prefetchRoute(target.route, reason)
-    }, index * 100) // Stagger by 100ms
+    }, index * 80) // Reduced from 100ms to 80ms for snappier performance
   })
 }
 
-// Home page specific: preload photos after page is fully rendered
-function startHomePagePhotoPreloading() {
-  if (route.path !== '/' || hasStartedPhotoPreload.value)
+// THE KEY FIX: Single unified initialization strategy
+function startUnifiedPreloading() {
+  if (hasStartedPhotoPreload.value || hasStartedBehavioralPreload.value)
     return
 
+  // Mark both as started to prevent race conditions
   hasStartedPhotoPreload.value = true
-
-  // Multiple strategies to detect when home page is fully rendered
-  const startPhotoPreloading = () => {
-    if (isDev) {
-      // eslint-disable-next-line no-console
-      console.log('🏠 Home page fully loaded, starting photo preloading...')
-    }
-    preloadPhotos('home-page-loaded')
-  }
-
-  // Strategy 1: After page is fully loaded and all images are rendered
-  if (document.readyState === 'complete') {
-    // Wait a bit more to ensure all components are rendered
-    setTimeout(startPhotoPreloading, 800)
-  }
-  else {
-    window.addEventListener('load', () => setTimeout(startPhotoPreloading, 800), { once: true })
-  }
-
-  // Strategy 2: Use intersection observer to detect when main content is visible
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && entry.intersectionRatio > 0.8) {
-        setTimeout(startPhotoPreloading, 500)
-        observer.disconnect()
-      }
-    })
-  }, { threshold: 0.8 })
-
-  // Observe the main content area
-  setTimeout(() => {
-    const mainContent = document.querySelector('main')
-    if (mainContent) {
-      observer.observe(mainContent)
-    }
-  }, 100)
-
-  // Strategy 3: Fallback after 2 seconds
-  setTimeout(() => {
-    if (!hasStartedPhotoPreload.value) {
-      startPhotoPreloading()
-    }
-  }, 2000)
-}
-
-// Post-load prefetching (zero impact on initial load)
-function startPostLoadPrefetching() {
-  if (hasStartedBehavioralPreload.value)
-    return
   hasStartedBehavioralPreload.value = true
 
-  // Multiple trigger strategies
-  const startPrefetching = () => {
-    if (isDev) {
-      // eslint-disable-next-line no-console
-      console.log('🎯 Starting post-load prefetching...')
-    }
-    executePrefetching('post-load')
+  if (isDev) {
+    // eslint-disable-next-line no-console
+    console.log('🚀 Starting unified preloading strategy...')
   }
 
-  // Strategy 1: After page is fully loaded (aligned with photo preloading timing)
+  // Single coordinated strategy - the root fix for refresh behavior
   if (document.readyState === 'complete') {
-    setTimeout(startPrefetching, 800)
+    // Already loaded - start immediately but staggered
+    setTimeout(() => {
+      // Route prefetching first (lighter)
+      executePrefetching('unified-init')
+
+      // Photo preloading second (heavier) - only on homepage
+      if (route.path === '/') {
+        setTimeout(() => preloadPhotos('unified-init'), 400)
+      }
+    }, isDev ? 800 : 600) // Shorter delay in production
   }
   else {
-    window.addEventListener('load', () => setTimeout(startPrefetching, 800), { once: true })
+    // Wait for load event
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        executePrefetching('unified-init')
+        if (route.path === '/') {
+          setTimeout(() => preloadPhotos('unified-init'), 400)
+        }
+      }, isDev ? 800 : 600)
+    }, { once: true })
   }
-
-  // Strategy 2: On user engagement
-  const startOnEngagement = () => {
-    if (hasStartedBehavioralPreload.value)
-      return
-    setTimeout(startPrefetching, 200)
-  }
-
-  window.addEventListener('scroll', startOnEngagement, { once: true, passive: true })
-
-  // Strategy 3: Fallback after 3 seconds
-  setTimeout(() => {
-    if (!hasStartedBehavioralPreload.value) {
-      startPrefetching()
-    }
-  }, 3000)
 }
 
-// Track scroll for behavioral prefetching
+// Lightweight scroll tracking
 function updateScrollProgress() {
   const scrollTop = window.scrollY
   const docHeight = document.documentElement.scrollHeight - window.innerHeight
   const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
   scrollProgress.value = Math.round(progress)
 
-  // Debounced behavioral prefetching
+  // Lightweight debounced prefetching
   if (scrollTimer)
     clearTimeout(scrollTimer)
-  scrollTimer = window.setTimeout(() => {
+  scrollTimer = setTimeout(() => {
     executePrefetching('scroll-behavior')
-  }, 300)
+  }, 200) // Reduced from 300ms for better responsiveness
 }
 
-// Track time on page
+// Simple time tracking
 function updateTimeOnPage() {
   timeOnPage.value = Math.round((Date.now() - startTime) / 1000)
 
   // Time-based prefetching
-  if (timeOnPage.value > 10) {
+  if (timeOnPage.value > 8) { // Reduced from 10s for earlier prefetching
     executePrefetching('time-behavior')
   }
 }
 
-// Setup hover prefetching for navigation
+// Lightweight hover prefetching
 function setupHoverPreloading() {
   const navLinks = document.querySelectorAll('nav a, .nav a')
 
@@ -334,25 +282,21 @@ function trackNavigation(to: string) {
   console.log(`📊 Navigation to ${to}: ${wasPreloaded ? 'HIT' : 'MISS'} (${hitRate}% hit rate)`)
 }
 
-// Setup and cleanup
+// Streamlined setup and cleanup
 onMounted(() => {
-  // Start post-load prefetching
-  startPostLoadPrefetching()
+  // THE MAIN FIX: Single unified strategy
+  startUnifiedPreloading()
 
-  // Start home page photo preloading if on home page
-  if (route.path === '/') {
-    startHomePagePhotoPreloading()
-  }
-
-  // Setup behavioral tracking
+  // Lightweight behavioral tracking
   window.addEventListener('scroll', updateScrollProgress, { passive: true })
-  timeTimer = window.setInterval(updateTimeOnPage, 5000)
+  timeTimer = setInterval(updateTimeOnPage, 4000) // Reduced from 5s for better tracking
 
   // Setup hover preloading
-  setTimeout(setupHoverPreloading, 1000)
+  setTimeout(setupHoverPreloading, 800) // Reduced from 1000ms
 })
 
 onUnmounted(() => {
+  // Simple cleanup - only what's necessary
   window.removeEventListener('scroll', updateScrollProgress)
   if (scrollTimer)
     clearTimeout(scrollTimer)
@@ -360,23 +304,22 @@ onUnmounted(() => {
     clearInterval(timeTimer)
 })
 
-// Reset on route change
+// Reset on route change - keep it simple
 router.beforeEach((to) => {
   trackNavigation(to.path)
 })
 
 router.afterEach(() => {
+  // Reset state
   hasStartedBehavioralPreload.value = false
   hasStartedPhotoPreload.value = false
   scrollProgress.value = 0
   timeOnPage.value = 0
   startTime = Date.now()
 
-  // Start home page photo preloading if navigating to home page
+  // Start unified preloading for new route
   if (route.path === '/') {
-    setTimeout(() => {
-      startHomePagePhotoPreloading()
-    }, 100)
+    setTimeout(startUnifiedPreloading, 50) // Quick start for homepage
   }
 })
 
@@ -385,7 +328,7 @@ useHead({
   link: criticalLinks.value,
 })
 
-// Expose debug info in development
+// Lightweight debug info in development
 if (isDev) {
   ;(window as any).__preloadingMetrics = {
     getCacheHitRate: () => totalNavigations.value > 0 ? (cacheHits.value / totalNavigations.value * 100).toFixed(1) : '0',
