@@ -16,7 +16,7 @@ Saw a [post from Antfu](https://antfu.me/posts/domain-email), about setting up h
 Prerequisites:
 
 - A email service provider (recommend Gmail)
-- A email routing service (Cloudflare or Forward Email)
+- A email routing service (Cloudflare or 3rd party eamail forwarding services)
 - A SMTP service provider (Resend)
 
 ## Overview
@@ -33,6 +33,8 @@ I will briefly go through the role of each components in this setup:
 
 In Antfu's post, Forward Email is mentioned as a free and open-source option. But if you are using Cloudflare for your domain DNS, the good news is that Cloudflare has a native email routing support. To me, Cloudflare also has much more credibility, so why not?
 
+If you are not using Cloudflare, there's still a way. You can use 3rd party services like Forward Email and ImprovMX, however Forward Email is not friendly to newly registed domains (it will detect if your domain is newly registered and they will charge for new domains). Hence, I recommend [ImprovMX](https://improvmx.com/), it is free for your first domain.
+
 The setup process is simple, just go to the domain in Cloudflare, and look for Email Routing setting. Add the email you want to forward, i.e. `hi@yourdomain.com` amd the destination to forward i.e. your gmail.
 
 And you are done for email routing.
@@ -45,8 +47,8 @@ Let's head over to the Resend dashboard now to create and get our API key:
 
 1. Go to the Resend official website
 2. Sign up or Log in
-3. Click on "Add an API Key"
-4. Verify your domain
+3. Verify your domain
+4. Click on "Add an API Key"
 
 It's that simple! Let's copy the API key - we'll need it later when configuring Gmail.
 
@@ -62,6 +64,8 @@ Port: 25, 465, 587, 2465, or 2587 (recommend to use 465)
 Username: resend
 Password: YOUR_API_KEY
 ```
+
+There's a checkbox "Treat as Alias", you can either check or uncheck it, as it works either wise.
 
 Click on save and you are done.
 
