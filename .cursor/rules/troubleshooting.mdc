@@ -1,0 +1,128 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Troubleshooting Guide
+
+## Common Development Issues
+
+### Build Errors
+
+**TypeScript Errors**
+- Check [tsconfig.json](mdc:tsconfig.json) for strict type settings
+- Ensure all imports have proper type definitions
+- Use `// @ts-ignore` sparingly and only when necessary
+
+**Vite Build Issues**
+- Clear `node_modules` and reinstall: `rm -rf node_modules && pnpm install`
+- Check [vite.config.ts](mdc:vite.config.ts) for plugin conflicts
+- Verify all dependencies are compatible versions
+
+**UnoCSS Classes Not Working**
+- Check if classes are included in [unocss.config.ts](mdc:unocss.config.ts) safelist
+- Verify UnoCSS preset configuration
+- Use browser dev tools to see if classes are generated
+
+### Content Issues
+
+**Markdown Not Rendering**
+- Verify frontmatter syntax (must be valid YAML)
+- Check markdown file placement in [pages/](mdc:pages/) directory
+- Ensure markdown processor plugins are configured in [vite.config.ts](mdc:vite.config.ts)
+
+**Images Not Loading**
+- Verify image paths relative to [public/](mdc:public/) directory
+- Check if images are optimized with photo scripts
+- Ensure HEIC files are converted to web-compatible formats
+
+**Routing Issues**
+- File-based routing requires proper file naming
+- Check route generation in browser dev tools
+- Verify page wrapper components are configured
+
+### Performance Issues
+
+**Slow Build Times**
+- Run photo optimization separately: `pnpm photos`
+- Use `pnpm dev` for development instead of full builds
+- Check large dependencies in bundle analysis
+
+**Large Bundle Size**
+- Use dynamic imports for heavy dependencies
+- Check icon usage and remove unused icons from safelist
+- Analyze bundle with vite-plugin-inspect
+
+## Debugging Tools
+
+### Development Tools
+
+- **Vite Inspector**: Available at `__inspect/` route during development
+- **Vue DevTools**: Browser extension for Vue component debugging
+- **Network Tab**: Monitor asset loading and API calls
+- **Console Logs**: Check for JavaScript errors and warnings
+
+### Build Analysis
+
+```bash
+# Analyze bundle composition
+pnpm build
+# Check dist/ folder size and contents
+
+# Photo processing debug
+pnpm photos --force
+# Force reprocess all photos
+
+# RSS generation test
+tsx scripts/rss.ts
+```
+
+### Script Debugging
+
+Individual scripts can be run for testing:
+
+- **Photo Management**: `tsx scripts/photos-manage-smart.ts`
+- **RSS Generation**: `tsx scripts/rss.ts`
+- **Image Compression**: `tsx scripts/img-compress.ts`
+- **Redirects**: `tsx scripts/redirects.ts`
+
+## Environment Issues
+
+### Node.js Version
+- Ensure Node.js version matches package.json engines field
+- Use `.nvmrc` if available for version management
+
+### Package Manager
+- This project uses pnpm exclusively
+- Install with: `npm install -g pnpm`
+- Use pnpm commands, not npm or yarn
+
+### Git Hooks
+- Pre-commit hooks may fail on photo processing
+- Run `pnpm photos` manually if needed
+- Check simple-git-hooks configuration in [package.json](mdc:package.json)
+
+## Production Issues
+
+### Netlify Deployment
+- Check [netlify.toml](mdc:netlify.toml) for build settings
+- Verify environment variables if using external APIs
+- Check build logs for specific error messages
+
+### Asset Loading
+- Ensure all assets exist in [public/](mdc:public/) or external URLs
+- Verify redirect rules in [_redirects](mdc:_redirects)
+- Check CORS settings for external resources
+
+### SEO and Meta Tags
+- Verify OG image generation in build process
+- Check RSS feed generation with [scripts/rss.ts](mdc:scripts/rss.ts)
+- Ensure proper meta tag rendering in production
+
+## Getting Help
+
+1. **Check Build Logs**: Review console output for specific errors
+2. **Isolate Issues**: Test individual components/pages
+3. **Clean Install**: Remove `node_modules` and reinstall dependencies
+4. **Version Check**: Ensure all dependencies are up to date
+5. **Documentation**: Refer to framework-specific documentation (Vue, Vite, UnoCSS)

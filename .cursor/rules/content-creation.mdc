@@ -1,0 +1,89 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Content Creation Guide
+
+## Creating Blog Posts
+
+Blog posts are created as Markdown files in the [pages/posts/](mdc:pages/posts/) directory:
+
+1. **File Naming**: Use descriptive kebab-case filenames (e.g., `my-awesome-post.md`)
+2. **Frontmatter**: Include metadata at the top of each post:
+   ```yaml
+   ---
+   title: "Your Post Title"
+   date: "2024-01-01"
+   description: "Brief description for SEO"
+   tags: ["tag1", "tag2"]
+   ---
+   ```
+3. **Content**: Write content in Markdown with enhanced features
+4. **Images**: Reference images from [public/](mdc:public/) or external URLs
+
+## Page Creation
+
+Create new pages in the [pages/](mdc:pages/) directory:
+
+- **Markdown Pages**: Use `.md` extension for content-heavy pages
+- **Vue Pages**: Use `.vue` extension for interactive pages
+- **Routing**: File-based routing automatically creates routes from file structure
+- **Layout**: Pages use wrapper components defined in [vite.config.ts](mdc:vite.config.ts)
+
+## Enhanced Markdown Features
+
+The markdown processor supports:
+
+- **Syntax Highlighting**: Code blocks with Shiki (Vitesse theme)
+- **Math**: LaTeX math expressions with proper rendering
+- **Alerts**: GitHub-style alerts (Note, Warning, etc.)
+- **Magic Links**: Auto-linking to projects and external resources
+- **Table of Contents**: Auto-generated TOC with anchor links
+- **Twoslash**: TypeScript code annotations
+
+## Photo Management
+
+Photos are managed through automated scripts:
+
+1. **Add Photos**: Place photos in [photos/](mdc:photos/) directory
+2. **Processing**: Run `pnpm photos` to optimize and generate metadata
+3. **Formats**: Supports HEIC, JPEG, PNG with automatic conversion
+4. **Optimization**: Automatic compression and responsive image generation
+5. **Gallery**: Photos are automatically included in the photo gallery page
+
+## Content Organization
+
+- **Main Pages**: [pages/index.md](mdc:pages/index.md), [pages/projects.md](mdc:pages/projects.md), etc.
+- **Blog Posts**: All posts in [pages/posts/](mdc:pages/posts/)
+- **Demo Pages**: Interactive demos in [demo/](mdc:demo/) directory
+- **Data Files**: JSON/YAML data in [src/data/](mdc:src/data/) and [data/](mdc:data/)
+
+## SEO and Metadata
+
+- **OG Images**: Automatically generated for posts with titles
+- **Meta Tags**: Use frontmatter for page-specific meta information
+- **RSS Feed**: Generated automatically from blog posts
+- **Sitemap**: Created during build process for better indexing
+
+## Writing Best Practices
+
+- **Headings**: Use proper heading hierarchy (H1 → H2 → H3)
+- **Links**: External links automatically get `target="_blank"`
+- **Code**: Use proper language tags for syntax highlighting
+- **Images**: Include alt text for accessibility
+- **Frontmatter**: Always include title, date, and description
+
+## Interactive Content
+
+- **Vue Components**: Embed Vue components in Markdown
+- **Demos**: Create interactive demos with Canvas, WebGL, or other APIs
+- **Data Visualization**: Use D3.js or other visualization libraries
+- **Animation**: Leverage CSS animations and Vue transitions
+
+## Content Review Process
+
+1. **Development**: Create and test content locally with `pnpm dev`
+2. **Optimization**: Run photo processing and linting
+3. **Preview**: Use `pnpm build && pnpm preview` to test production build
+4. **Deployment**: Push to main branch for automatic Netlify deployment

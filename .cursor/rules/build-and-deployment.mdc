@@ -1,0 +1,65 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Build and Deployment Guide
+
+## Build Configuration
+
+The build process is configured in [vite.config.ts](mdc:vite.config.ts) with the following key features:
+
+- **Static Site Generation**: Uses vite-ssg for pre-rendering
+- **File-based Routing**: Auto-generated routes from [pages/](mdc:pages/) directory
+- **Markdown Processing**: Enhanced markdown with syntax highlighting, TOC, and magic links
+- **Auto-imports**: Components, utilities, and composables are automatically imported
+- **Icon System**: Unplugin-icons with extensive icon collections
+
+## Build Scripts
+
+Available in [package.json](mdc:package.json):
+
+- `pnpm dev` - Start development server on port 3333
+- `pnpm build` - Full production build (includes static generation, photos, RSS)
+- `pnpm preview` - Preview production build locally
+- `pnpm static` - Download and process static assets
+- `pnpm photos` - Process and optimize photos
+- `pnpm compress` - Compress staged image files
+
+## Build Process Steps
+
+1. **Static Assets**: Download external assets via [scripts/copy-sponsors.ts](mdc:scripts/copy-sponsors.ts)
+2. **Photo Processing**: Optimize photos with [scripts/photos-manage-smart.ts](mdc:scripts/photos-manage-smart.ts)
+3. **SSG Build**: Generate static pages with vite-ssg
+4. **Font Copying**: Copy fonts via [scripts/copy-fonts.ts](mdc:scripts/copy-fonts.ts)
+5. **RSS Generation**: Create RSS feed with [scripts/rss.ts](mdc:scripts/rss.ts)
+6. **Redirects**: Copy redirect rules from [_dist_redirects](mdc:_dist_redirects)
+
+## Deployment Configuration
+
+- **Platform**: Netlify (configured in [netlify.toml](mdc:netlify.toml))
+- **Build Command**: `pnpm build`
+- **Publish Directory**: `dist/`
+- **Redirects**: Handled by [_redirects](mdc:_redirects) file
+- **Environment**: Node.js with pnpm package manager
+
+## Asset Management
+
+- **Photos**: Stored in [photos/](mdc:photos/) directory with automatic optimization
+- **OG Images**: Generated automatically for blog posts and pages
+- **Static Files**: Public assets in [public/](mdc:public/) directory
+- **External Assets**: Downloaded during build from GitHub repositories
+
+## Performance Optimizations
+
+- **Image Compression**: Automatic HEIC/JPEG optimization with Sharp
+- **Code Splitting**: Vite's automatic code splitting and tree shaking
+- **Bundle Analysis**: Available via vite-plugin-inspect
+- **Font Loading**: Local font processing with UnoCSS web fonts preset
+
+## Quality Assurance
+
+- **Type Checking**: TypeScript strict mode enabled
+- **Linting**: ESLint with @antfu/eslint-config
+- **Pre-commit Hooks**: Automatic linting and photo processing
+- **Build Validation**: Comprehensive build process with error handling

@@ -1,0 +1,42 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Bicheng.me Personal Website
+
+This is a personal website built with Vue 3, Vite, and modern web technologies. The site features a blog, projects showcase, photo gallery, and interactive demos.
+
+## Architecture Overview
+
+- **Framework**: Vue 3 with Composition API
+- **Build Tool**: Vite with SSG (Static Site Generation)
+- **UI Framework**: UnoCSS for atomic CSS
+- **Routing**: File-based routing with [vite.config.ts](mdc:vite.config.ts)
+- **Content**: Markdown files in [pages/](mdc:pages/) directory
+- **Components**: Vue components in [src/components/](mdc:src/components/)
+- **Package Manager**: pnpm with workspace configuration in [pnpm-workspace.yaml](mdc:pnpm-workspace.yaml)
+
+## Key Features
+
+- Static site generation with vite-ssg
+- Markdown-based content with frontmatter
+- Photo management and optimization
+- RSS feed generation
+- Dark/light theme support
+- Interactive demos and visualizations
+- SEO optimization with OG image generation
+
+## Development Workflow
+
+- Use `pnpm dev` to start development server
+- Use `pnpm build` to build for production
+- Scripts are managed in [scripts/](mdc:scripts/) directory
+- Auto-imports configured for Vue composables and utilities
+
+## Entry Points
+
+- Main application: [src/main.ts](mdc:src/main.ts)
+- Root component: [src/App.vue](mdc:src/App.vue)
+- Build configuration: [vite.config.ts](mdc:vite.config.ts)
+- Styling configuration: [unocss.config.ts](mdc:unocss.config.ts)

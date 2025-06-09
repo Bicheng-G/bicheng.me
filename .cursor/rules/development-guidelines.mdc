@@ -1,0 +1,48 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Development Guidelines
+
+## Code Style and Standards
+
+- **ESLint Configuration**: Follow [@antfu/eslint-config](https://github.com/antfu/eslint-config) rules defined in [eslint.config.js](mdc:eslint.config.js)
+- **TypeScript**: Strict mode enabled, use proper typing for all components and utilities
+- **Vue**: Use Composition API with `<script setup>` syntax
+- **Auto-imports**: Vue composables, utilities, and components are auto-imported via unplugin configuration
+
+## File Organization
+
+- **Components**: Place reusable Vue components in [src/components/](mdc:src/components/)
+- **Pages**: Create new pages as `.md` or `.vue` files in [pages/](mdc:pages/)
+- **Utilities**: Add utility functions to [src/logics/](mdc:src/logics/)
+- **Types**: Define TypeScript types in [src/types.ts](mdc:src/types.ts)
+- **Scripts**: Build and automation scripts go in [scripts/](mdc:scripts/)
+
+## Styling Guidelines
+
+- **UnoCSS**: Use atomic CSS classes defined in [unocss.config.ts](mdc:unocss.config.ts)
+- **Theme Support**: Always consider dark/light theme compatibility
+- **Responsive Design**: Use UnoCSS responsive prefixes (sm:, md:, lg:)
+- **Custom Shortcuts**: Leverage predefined shortcuts like `btn-*` and `bg-base`
+
+## Content Management
+
+- **Markdown**: Use frontmatter for page metadata
+- **Photos**: Manage photos with scripts in [scripts/photos-manage-smart.ts](mdc:scripts/photos-manage-smart.ts)
+- **Blog Posts**: Create posts in [pages/posts/](mdc:pages/posts/) directory
+- **Assets**: Store images and static assets in [public/](mdc:public/) or reference external URLs
+
+## Performance Best Practices
+
+- **Image Optimization**: Use the photo management scripts for automatic compression
+- **Code Splitting**: Leverage Vite's automatic code splitting
+- **Bundle Analysis**: Use `vite-plugin-inspect` for bundle analysis
+- **SEO**: Ensure proper meta tags and OG image generation
+
+## Git Workflow
+
+- **Pre-commit Hooks**: ESLint auto-fix and photo optimization run on staged files
+- **Branch Protection**: Follow semantic commit conventions
+- **Photo Management**: Photos are automatically processed when committed

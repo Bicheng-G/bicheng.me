@@ -1,0 +1,92 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Core Development Principles
+
+## AI Behavior Guidelines
+
+- **Limit Scope**: Keep changes focused and minimal, avoid large multi-file refactors unless explicitly requested
+- **Task Management**: For complex tasks, create a temporary to-do list and follow it through systematically, removing it after completion
+- **Test-Driven**: When implementing features or fixes, generate corresponding tests and ensure they pass before proceeding
+- **Explain Reasoning**: Always explain your reasoning before making code changes
+- **Breaking Changes**: Ask for confirmation before making breaking changes that could affect existing functionality
+- **Pattern Recognition**: Suggest better patterns when you identify code repetition or anti-patterns
+- **Offer Alternatives**: If unsure about an approach, provide 2-3 alternative solutions with trade-offs
+- **Document Logic**: Use comments to explain non-obvious business logic and complex implementations
+
+## Vue.js Patterns
+
+- **Composition API**: Use `<script setup>` syntax by default for better performance and DX
+- **Static First**: Leverage static site generation with vite-ssg, only add client-side logic when necessary
+- **Component Structure**: Prefer single-file components (.vue) with clear separation of concerns
+- **Reactivity**: Use Vue's reactivity system properly (ref, reactive, computed) instead of manual state management
+- **Composables**: Extract reusable logic into composables in [src/logics/](mdc:src/logics)
+- **Props/Emits**: Define clear interfaces with TypeScript for component props and emits
+- **Template Refs**: Use template refs sparingly, prefer reactive data flow
+
+## Component Best Practices
+
+- **Composables**: Create custom composables for any logic that's not pure UI presentation
+- **Function Components**: Prefer Composition API over Options API
+- **Clean Templates**: Keep templates clean - extract complex logic to computed properties or methods
+- **Key Props**: Always use proper key attributes in v-for loops
+- **State Handling**: Handle loading, error, and empty states explicitly in components
+- **Component Size**: Keep components small and focused on a single responsibility
+
+## Styling and UI Guidelines
+
+- **UnoCSS Only**: Always use UnoCSS atomic classes defined in [unocss.config.ts](mdc:unocss.config.ts), never inline styles
+- **Theme Support**: Ensure all styling works with both light and dark themes using `bg-base`, `color-base` utilities
+- **Responsive**: Use UnoCSS responsive prefixes (sm:, md:, lg:) for mobile-first design
+- **Shortcuts**: Leverage predefined shortcuts like `btn-*` classes for consistency
+- **CSS Variables**: Use CSS custom properties for dynamic theming when atomic classes aren't sufficient
+
+## TypeScript Standards
+
+- **Strict Typing**: Use TypeScript everywhere with strict mode enabled, avoid `any` types
+- **Type Definitions**: Define types in [src/types.ts](mdc:src/types.ts) or co-located type files
+- **Interface Design**: Use interfaces for object shapes, types for unions and primitives
+- **Generic Types**: Leverage generics for reusable type definitions
+- **Auto-imports**: Take advantage of auto-import system configured in [vite.config.ts](mdc:vite.config.ts)
+
+## Code Quality Standards
+
+- **Variable Declaration**: Prefer `const` over `let`, use destructuring over dot notation
+- **Naming**: Use meaningful variable names (avoid `i`, `j` unless in obvious loops)
+- **Function Purity**: Write pure functions when possible, clearly separate side effects
+- **Error Handling**: Implement proper error boundaries and error handling patterns
+- **Performance**: Consider performance implications, use Vue's built-in optimizations
+
+## File Organization
+
+- **Components**: Place reusable components in [src/components/](mdc:src/components)
+- **Utilities**: Pure functions and helpers in [src/logics/](mdc:src/logics)
+- **Types**: TypeScript definitions in [src/types.ts](mdc:src/types.ts)
+- **Pages**: Content pages in [pages/](mdc:pages) directory
+- **One Component Rule**: Generally one component per file for maintainability
+- **Barrel Exports**: Use index files for clean imports when appropriate
+
+## Content and Asset Management
+
+- **Markdown**: Use enhanced markdown features defined in [vite.config.ts](mdc:vite.config.ts)
+- **Images**: Optimize images through [scripts/photos-manage-smart.ts](mdc:scripts/photos-manage-smart.ts)
+- **Static Assets**: Place static files in [public/](mdc:public) directory
+- **External Resources**: Use magic links system for consistent external references
+
+## Build and Performance
+
+- **Static Generation**: Leverage vite-ssg for optimal performance
+- **Code Splitting**: Use dynamic imports for heavy dependencies
+- **Bundle Analysis**: Monitor bundle size with vite-plugin-inspect
+- **Image Optimization**: Use automated photo processing scripts
+- **SEO**: Ensure proper meta tags and OG image generation
+
+## Development Workflow
+
+- **Development Server**: Use `pnpm dev` for fast development feedback
+- **Type Checking**: Run TypeScript checks regularly during development
+- **Linting**: Follow ESLint rules defined in [eslint.config.js](mdc:eslint.config.js)
+- **Testing**: Write tests for complex logic and business rules
+- **Git Hooks**: Leverage pre-commit hooks for code quality assurance
