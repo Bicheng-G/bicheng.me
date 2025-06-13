@@ -27,6 +27,20 @@ let startTime = Date.now()
 let scrollTimer: ReturnType<typeof setTimeout> | null = null
 let timeTimer: ReturnType<typeof setInterval> | null = null
 
+// Task 1: Extract Magic Numbers into Constants
+const PHOTO_PRELOAD_COUNT = 8
+const PHOTO_STAGGER_DELAY_MS = 250
+const ROUTE_STAGGER_DELAY_MS = 80
+const CRITICAL_PHOTOS_COUNT = 2 // First 2 photos get high priority
+const DEV_INIT_DELAY_MS = 800
+const PROD_INIT_DELAY_MS = 600
+const PHOTO_PRELOAD_DELAY_MS = 400
+const SCROLL_DEBOUNCE_MS = 200
+const TIME_BASED_PREFETCH_THRESHOLD_S = 8
+const HOVER_SETUP_DELAY_MS = 800
+const TIME_TRACKING_INTERVAL_MS = 4000
+const HOMEPAGE_QUICK_START_DELAY_MS = 50
+
 // Critical resources that should always be loaded
 const criticalLinks = computed(() => [
   // Critical fonts
@@ -53,12 +67,11 @@ const criticalLinks = computed(() => [
   { rel: 'preconnect' as const, href: 'https://cv.bicheng.me' },
 ])
 
-// Lightweight prefetch - keep it simple and fast
+// Task 2: Optimize Route Prefetching - Use Set lookup instead of DOM query
 function prefetchRoute(routePath: string, reason: string) {
   try {
-    // Check if already prefetched
-    const existingLink = document.querySelector(`link[rel="prefetch"][href="${routePath}"]`)
-    if (existingLink)
+    // Use O(1) Set lookup instead of O(n) DOM query
+    if (preloadedRoutes.value.has(routePath))
       return false
 
     // Create prefetch link
@@ -84,43 +97,66 @@ function prefetchRoute(routePath: string, reason: string) {
   }
 }
 
-// Optimized photo preloading - single strategy, minimal overhead
+// Task 3: Batch DOM Operations + Task 4: Add fetchpriority for critical photos
 async function preloadPhotos(reason: string) {
   try {
     // Simple dynamic import
     const photosModule = await import('../../photos/data')
     const photos = photosModule.default
 
-    // Get first 6 photos (already sorted by timestamp descending)
-    const photosToPreload = photos.slice(0, 6)
+    // Get first N photos (already sorted by timestamp descending)
+    const photosToPreload = photos.slice(0, PHOTO_PRELOAD_COUNT)
 
     if (isDev) {
       // eslint-disable-next-line no-console
       console.log(`📸 Starting photo prefetch: ${photosToPreload.length} photos (${reason})`)
     }
 
-    // Simple staggered preloading - no complex promises or tracking
+    // Task 3: Batch DOM operations using DocumentFragment
+    const fragment = document.createDocumentFragment()
+    const linksToAdd: HTMLLinkElement[] = []
+
+    // Create all link elements first
     photosToPreload.forEach((photo: any, index: number) => {
+      // Check if already preloaded
+      if (preloadedPhotos.value.has(photo.url))
+        return
+
+      // Create prefetch link for image
+      const link = document.createElement('link')
+      link.rel = 'prefetch'
+      link.href = photo.url
+      link.as = 'image'
+      link.crossOrigin = 'anonymous'
+
+      // Task 4: Add high priority for critical photos (first 2)
+      if (index < CRITICAL_PHOTOS_COUNT) {
+        link.setAttribute('fetchpriority', 'high')
+      }
+
+      linksToAdd.push(link)
+      preloadedPhotos.value.add(photo.url)
+
+      if (isDev) {
+        // eslint-disable-next-line no-console
+        console.log(`📷 Prepared photo ${index + 1}/${PHOTO_PRELOAD_COUNT}: ${photo.name} ${index < CRITICAL_PHOTOS_COUNT ? '(HIGH PRIORITY)' : ''} (${reason})`)
+      }
+    })
+
+    // Staggered batched insertion for optimal performance
+    linksToAdd.forEach((link, index) => {
       setTimeout(() => {
-        // Check if already preloaded
-        if (preloadedPhotos.value.has(photo.url))
-          return
+        fragment.appendChild(link)
 
-        // Create prefetch link for image
-        const link = document.createElement('link')
-        link.rel = 'prefetch'
-        link.href = photo.url
-        link.as = 'image'
-        link.crossOrigin = 'anonymous'
-        document.head.appendChild(link)
-
-        preloadedPhotos.value.add(photo.url)
-
-        if (isDev) {
-          // eslint-disable-next-line no-console
-          console.log(`📷 Prefetched photo ${index + 1}/6: ${photo.name} (${reason})`)
+        // Append fragment to DOM in batches to balance performance and responsiveness
+        if (index === linksToAdd.length - 1 || (index + 1) % 3 === 0) {
+          document.head.appendChild(fragment.cloneNode(true))
+          // Clear fragment for next batch
+          while (fragment.firstChild) {
+            fragment.removeChild(fragment.firstChild)
+          }
         }
-      }, index * 250) // Reduced from 300ms to 250ms for better performance
+      }, index * PHOTO_STAGGER_DELAY_MS)
     })
 
     return true
@@ -183,7 +219,7 @@ function executePrefetching(reason: string) {
   targets.forEach((target, index) => {
     setTimeout(() => {
       prefetchRoute(target.route, reason)
-    }, index * 80) // Reduced from 100ms to 80ms for snappier performance
+    }, index * ROUTE_STAGGER_DELAY_MS)
   })
 }
 
@@ -202,6 +238,9 @@ function startUnifiedPreloading() {
   }
 
   // Single coordinated strategy - the root fix for refresh behavior
+  const isHomepage = route.path === '/'
+  const initDelay = isDev ? DEV_INIT_DELAY_MS : PROD_INIT_DELAY_MS
+
   if (document.readyState === 'complete') {
     // Already loaded - start immediately but staggered
     setTimeout(() => {
@@ -209,20 +248,20 @@ function startUnifiedPreloading() {
       executePrefetching('unified-init')
 
       // Photo preloading second (heavier) - only on homepage
-      if (route.path === '/') {
-        setTimeout(() => preloadPhotos('unified-init'), 400)
+      if (isHomepage) {
+        setTimeout(() => preloadPhotos('unified-init'), PHOTO_PRELOAD_DELAY_MS)
       }
-    }, isDev ? 800 : 600) // Shorter delay in production
+    }, initDelay)
   }
   else {
     // Wait for load event
     window.addEventListener('load', () => {
       setTimeout(() => {
         executePrefetching('unified-init')
-        if (route.path === '/') {
-          setTimeout(() => preloadPhotos('unified-init'), 400)
+        if (isHomepage) {
+          setTimeout(() => preloadPhotos('unified-init'), PHOTO_PRELOAD_DELAY_MS)
         }
-      }, isDev ? 800 : 600)
+      }, initDelay)
     }, { once: true })
   }
 }
@@ -239,7 +278,7 @@ function updateScrollProgress() {
     clearTimeout(scrollTimer)
   scrollTimer = setTimeout(() => {
     executePrefetching('scroll-behavior')
-  }, 200) // Reduced from 300ms for better responsiveness
+  }, SCROLL_DEBOUNCE_MS)
 }
 
 // Simple time tracking
@@ -247,7 +286,7 @@ function updateTimeOnPage() {
   timeOnPage.value = Math.round((Date.now() - startTime) / 1000)
 
   // Time-based prefetching
-  if (timeOnPage.value > 8) { // Reduced from 10s for earlier prefetching
+  if (timeOnPage.value > TIME_BASED_PREFETCH_THRESHOLD_S) {
     executePrefetching('time-behavior')
   }
 }
@@ -289,10 +328,10 @@ onMounted(() => {
 
   // Lightweight behavioral tracking
   window.addEventListener('scroll', updateScrollProgress, { passive: true })
-  timeTimer = setInterval(updateTimeOnPage, 4000) // Reduced from 5s for better tracking
+  timeTimer = setInterval(updateTimeOnPage, TIME_TRACKING_INTERVAL_MS)
 
   // Setup hover preloading
-  setTimeout(setupHoverPreloading, 800) // Reduced from 1000ms
+  setTimeout(setupHoverPreloading, HOVER_SETUP_DELAY_MS)
 })
 
 onUnmounted(() => {
@@ -319,7 +358,7 @@ router.afterEach(() => {
 
   // Start unified preloading for new route
   if (route.path === '/') {
-    setTimeout(startUnifiedPreloading, 50) // Quick start for homepage
+    setTimeout(startUnifiedPreloading, HOMEPAGE_QUICK_START_DELAY_MS)
   }
 })
 
