@@ -161,9 +161,6 @@ catalogs:
     d3-hierarchy:
       specifier: ^3.1.2
       version: 3.1.2
-    d3-shape:
-      specifier: ^3.2.0
-      version: 3.2.0
     dayjs:
       specifier: ^1.11.13
       version: 1.11.13
@@ -173,12 +170,6 @@ catalogs:
     heic-convert:
       specifier: ^2.1.0
       version: 2.1.0
-    matter-attractors:
-      specifier: ^0.1.6
-      version: 0.1.6
-    matter-js:
-      specifier: ^0.20.0
-      version: 0.20.0
     nprogress:
       specifier: ^0.2.0
       version: 0.2.0
@@ -208,9 +199,6 @@ catalogs:
       version: 0.0.0
   types:
     '@types/d3-hierarchy':
-      specifier: ^3.1.7
-      version: 3.1.7
-    '@types/d3-shape':
       specifier: ^3.1.7
       version: 3.1.7
     '@types/degit':
@@ -260,9 +248,6 @@ importers:
       d3-hierarchy:
         specifier: catalog:frontend
         version: 3.1.2
-      d3-shape:
-        specifier: catalog:frontend
-        version: 3.2.0
       dayjs:
         specifier: catalog:frontend
         version: 1.11.13
@@ -272,12 +257,6 @@ importers:
       heic-convert:
         specifier: catalog:frontend
         version: 2.1.0
-      matter-attractors:
-        specifier: catalog:frontend
-        version: 0.1.6
-      matter-js:
-        specifier: catalog:frontend
-        version: 0.20.0
       nprogress:
         specifier: catalog:frontend
         version: 0.2.0
@@ -331,9 +310,6 @@ importers:
         specifier: catalog:build
         version: 3.3.0(typescript@5.8.3)
       '@types/d3-hierarchy':
-        specifier: catalog:types
-        version: 3.1.7
-      '@types/d3-shape':
         specifier: catalog:types
         version: 3.1.7
       '@types/degit':
@@ -1160,12 +1136,6 @@ packages:
   '@types/d3-hierarchy@3.1.7':
     resolution: {integrity: sha512-tJFtNoYBtRtkNysX1Xq4sxtjK8YgoWUNpIiUee0/jHGRwqvzYxkq0hGVbbOGSz+JgFxxRu4K8nb3YpG3CMARtg==}
 
-  '@types/d3-path@3.1.1':
-    resolution: {integrity: sha512-VMZBYyQvbGmWyWVea0EHs/BwLgxc+MKi1zLDCONksozI4YJMcTt8ZEuIR4Sb1MMTE8MMW49v0IwI5+b7RmfWlg==}
-
-  '@types/d3-shape@3.1.7':
-    resolution: {integrity: sha512-VLvUQ33C+3J+8p+Daf+nYSOsjB4GXp19/S/aGo60m9h1v6XaxjiT82lKVWJCfzhtuZ3yD7i/TPeC/fuKLLOSmg==}
-
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
 
@@ -1902,14 +1872,6 @@ packages:
 
   d3-hierarchy@3.1.2:
     resolution: {integrity: sha512-FX/9frcub54beBdugHjDCdikxThEqjnR93Qt7PvQTOHxyiNCAlvMrHhclk3cD5VeAaq9fxmfRp+CnWw9rEMBuA==}
-    engines: {node: '>=12'}
-
-  d3-path@3.1.0:
-    resolution: {integrity: sha512-p3KP5HCf/bvjBSSKuXid6Zqijx7wIfNW+J/maPs+iwR35at5JCbLUT0LzF1cnjbCHWhqzQTIN2Jpe8pRebIEFQ==}
-    engines: {node: '>=12'}
-
-  d3-shape@3.2.0:
-    resolution: {integrity: sha512-SaLBuwGm3MOViRq2ABk3eLoxwZELpH6zhl3FbAoJ7Vm1gofKx6El1Ib5z23NUEhF9AsGl7y+dzLe5Cw2AArGTA==}
     engines: {node: '>=12'}
 
   data-urls@5.0.0:
@@ -2816,12 +2778,6 @@ packages:
 
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
-
-  matter-attractors@0.1.6:
-    resolution: {integrity: sha512-vGFsFHS9m0hXnaswfKXT2nKfPXJs4lwnQJwkGrs1IHrVldKAmlBKBb4OcYh0rwQga3CFWGUq3JvKpWZvZuqlDQ==}
-
-  matter-js@0.20.0:
-    resolution: {integrity: sha512-iC9fYR7zVT3HppNnsFsp9XOoQdQN2tUyfaKg4CHLH8bN+j6GT4Gw7IH2rP0tflAebrHFw730RR3DkVSZRX8hwA==}
 
   mdast-util-find-and-replace@3.0.2:
     resolution: {integrity: sha512-Tmd1Vg/m3Xz43afeNxDIhWRtFZgM2VLyaf4vSTYwudTyeuTneoL3qtWMA5jeLyz/O1vDJmmV4QuScFCA2tBPwg==}
@@ -4702,12 +4658,6 @@ snapshots:
 
   '@types/d3-hierarchy@3.1.7': {}
 
-  '@types/d3-path@3.1.1': {}
-
-  '@types/d3-shape@3.1.7':
-    dependencies:
-      '@types/d3-path': 3.1.1
-
   '@types/debug@4.1.12':
     dependencies:
       '@types/ms': 2.1.0
@@ -5523,12 +5473,6 @@ snapshots:
   csstype@3.1.3: {}
 
   d3-hierarchy@3.1.2: {}
-
-  d3-path@3.1.0: {}
-
-  d3-shape@3.2.0:
-    dependencies:
-      d3-path: 3.1.0
 
   data-urls@5.0.0:
     dependencies:
@@ -6515,10 +6459,6 @@ snapshots:
       uc.micro: 2.1.0
 
   markdown-table@3.0.4: {}
-
-  matter-attractors@0.1.6: {}
-
-  matter-js@0.20.0: {}
 
   mdast-util-find-and-replace@3.0.2:
     dependencies:
