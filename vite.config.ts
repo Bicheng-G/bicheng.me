@@ -128,23 +128,23 @@ export default defineConfig({
           linksMap: {
             'Soon Heng': {
               link: 'https://www.soonhengtaxi.com.sg/',
-              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/sht.png', // or another image URL
+              imageUrl: '/images/sht.webp',
             },
             'Elite CoPilot': {
               link: 'https://elitetaxsystems.com/Solution-EliteCopilot',
-              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/elite_copilot.png',
+              imageUrl: '/images/elite_copilot.webp',
             },
             'Pivox': {
               link: 'https://www.pivox.com.sg/',
-              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/pivox.png',
+              imageUrl: '/images/pivox.webp',
             },
             'Elitetax Systems': {
               link: 'https://elitetaxsystems.com',
-              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/elitetax-transparent.png',
+              imageUrl: '/images/elitetax.webp',
             },
             'Pet Parents Club': {
               link: 'https://shopee.sg/petparentsclub',
-              imageUrl: 'https://raw.githubusercontent.com/Bicheng-G/assets/main/assets/ppc.png',
+              imageUrl: '/images/ppc.webp',
             },
             // 'Financial Consultant': {
             // link: 'https://www.financialconsultant.com.sg/',
