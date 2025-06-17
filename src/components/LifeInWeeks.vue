@@ -8,7 +8,7 @@ const MONTHS_PER_YEAR = 12
 const TOTAL_MONTHS = LIFE_SPAN * MONTHS_PER_YEAR
 
 // Use fewer columns for better performance
-const COLS = 45 // Reduced from 60 to 45
+const COLS = 60
 const ROWS = Math.ceil(TOTAL_MONTHS / COLS)
 
 // Calculate time dynamically using VueUse's useNow
