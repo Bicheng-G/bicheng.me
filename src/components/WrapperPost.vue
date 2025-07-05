@@ -1,7 +1,4 @@
 <script setup lang='ts'>
-import { useEventListener } from '@vueuse/core'
-import { computed, defineAsyncComponent, onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router/auto'
 import { formatDate } from '~/logics'
 
 const { frontmatter } = defineProps({
