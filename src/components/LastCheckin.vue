@@ -41,10 +41,13 @@ const timeAgo = computed(() => {
 
 const placeName = computed(() => data.value?.venue?.name || 'somewhere')
 const cityName = computed(() => data.value?.venue?.location?.city || 'this universe')
+const mapUrl = computed(() =>
+  `https://www.google.com/maps/place/${encodeURIComponent(`${placeName.value} ${cityName.value}`)}`,
+)
 // We will render the sentence directly in the template so the icon span is parsed as real HTML.
 </script>
 
 <template>
   <span v-if="isLoading">Looking for BC...</span>
-  <span v-else>Last seen {{ timeAgo }}, at {{ placeName }}<span i-ri-pushpin-line /> in {{ cityName }}.</span>
+  <span v-else>Last seen {{ timeAgo }}, at <a :href="mapUrl" target="_blank" rel="noopener noreferrer"> {{ placeName }}<span i-ri-pushpin-line /></a> in {{ cityName }}.</span>
 </template>
