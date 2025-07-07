@@ -93,7 +93,7 @@
     "vite-plugin-optimize-exclude": "catalog:build",
     "vite-ssg": "catalog:build",
     "vite-svg-loader": "catalog:build",
-    "@netlify/functions": "^4.43.0"
+    "@netlify/functions": "^4.1.9"
   },
   "resolutions": {
     "vite": "catalog:build"
