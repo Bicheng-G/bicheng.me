@@ -42,7 +42,7 @@ const timeAgo = computed(() => {
 const placeName = computed(() => data.value?.venue?.name || 'somewhere')
 const cityName = computed(() => data.value?.venue?.location?.city || 'this universe')
 const finalMessage = computed(
-  () => `Last seen ${timeAgo.value}, at ${placeName.value} in ${cityName.value}`,
+  () => `Last seen ${timeAgo.value}, at ${placeName.value} in ${cityName.value}. `,
 )
 </script>
 
