@@ -78,7 +78,12 @@ export const handler: Handler = async (event: any) => {
 
   // ──────────────────────────────────────────────
   // Manual override command: /set <place> | <date>
-  // ──────────────────────────────────────────────
+  if (typeof message.text === 'string' && message.text.startsWith('/help')) {
+    const helpText = `LastCheckin bot usage:\n\n• Send a Location pin 📍 to set your whereabouts.\n• Send a photo *as a file* (Attach → File → Photos) to use its EXIF GPS.\n• /set Place, City | YYYY-MM-DD HH:mm  — manually set place and optional date.\n   ↳ Date part is optional; omit it to use current time.\n• /help  — show this message.`
+    await sendTelegramMessage(message.chat.id, helpText)
+    return { statusCode: 200, body: 'help shown' }
+  }
+
   if (typeof message.text === 'string' && message.text.startsWith('/set ')) {
     const raw = message.text.slice(5).trim()
     if (!raw) {
@@ -177,7 +182,7 @@ export const handler: Handler = async (event: any) => {
 
   if (lat === undefined || lon === undefined) {
     // Nothing we can do
-    await sendTelegramMessage(message.chat.id, 'Could not extract location from that message. Try sending a Location pin?')
+    await sendTelegramMessage(message.chat.id, 'Could not extract location from that message. Try sending a Location pin? Or type /help')
     return { statusCode: 200, body: 'No location' }
   }
 

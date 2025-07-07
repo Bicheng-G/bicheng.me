@@ -42,11 +42,11 @@ const timeAgo = computed(() => {
 const placeName = computed(() => data.value?.venue?.name || 'somewhere')
 const cityName = computed(() => data.value?.venue?.location?.city || 'this universe')
 const finalMessage = computed(
-  () => `last seen ${timeAgo.value}, at ${placeName.value} in ${cityName.value}`,
+  () => `Last seen ${timeAgo.value}, at ${placeName.value} in ${cityName.value}`,
 )
 </script>
 
 <template>
-  <span v-if="isLoading">looking for BC...</span>
+  <span v-if="isLoading">Looking for BC...<br></span>
   <span v-else>{{ finalMessage }}</span>
 </template>
