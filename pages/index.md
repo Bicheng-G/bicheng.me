@@ -20,7 +20,7 @@ Creator of {Pet Parents Club}<br>
 
 Off-screen, I enjoy photography and traveling, I post [photos on this page](/photos). Inspired by learning out loud, I write [blog posts](/posts) about self-actualization, metacognition, sciense-based-parenting, etc.
 
-I'm based in <a href="https://map.bicheng.me" target="_blank"><ruby lang="ja">Singapore<span i-ri-pushpin-line /><rp>(</rp><rt></rt><rp>)</rp></ruby></a>, if you are around, please reach out and let's have some coffee or work together.
+I'm based in Singapore - <LastCheckin />. If you are around, let's have some coffee or work together.
 
 <div slide-enter slide-enter-2 mb-8>
 <PhotoGalleryHighlights />
@@ -30,7 +30,7 @@ As an optimizer, I'm adept in polishing the product and refining the process.
 
 > Give me a v0 and a direct line to users, and I shall iterate it into the product users can't live without.
 
-I'm always fascinated by the representation of entire lifespan in finite grids, so I created one as a reminder to myself - <span class="text-[var(--fg-deeper)]"><ruby lang="ja">live in the moment<rp>(</rp><rt>活在当下</rt><rp>)</rp></ruby></span>.
+Looking at the entire lifespan from a distance reminds me to <span class="text-[var(--fg-deeper)]"><ruby lang="ja">live in the moment<rp>(</rp><rt>活在当下</rt><rp>)</rp></ruby></span>.
 
 <div  slide-enter slide-enter-4 my-8 />
 <ClientOnly>
