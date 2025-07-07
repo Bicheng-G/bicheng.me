@@ -1,4 +1,3 @@
-// @ts-expect-error - Netlify types
 import type { Handler } from '@netlify/functions'
 
 const GIST_ID = process.env.GIST_ID!

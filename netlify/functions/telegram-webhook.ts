@@ -1,6 +1,4 @@
-// @ts-expect-error - Netlify provides types at build time, ignore during local lint
 import type { Handler } from '@netlify/functions'
-// @ts-expect-error - exifr has no types in our project yet
 import { parse as parseEXIF } from 'exifr'
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN!
@@ -8,6 +6,30 @@ const GIST_ID = process.env.GIST_ID!
 const GH_TOKEN = process.env.GH_TOKEN!
 
 const TELEGRAM_API = `https://api.telegram.org/bot${BOT_TOKEN}`
+
+async function sendTelegramMessage(chatId: number, text: string) {
+  await fetch(`${TELEGRAM_API}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: chatId, text }),
+  })
+}
+
+async function patchGist(payload: any) {
+  const res = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+    method: 'PATCH',
+    headers: {
+      'Authorization': `token ${GH_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      files: {
+        'last-checkin.json': { content: JSON.stringify(payload, null, 2) },
+      },
+    }),
+  })
+  return res.ok
+}
 
 // Simple helper to choose a decent place name from Nominatim result
 function pickPlaceName(obj: any) {
@@ -54,17 +76,84 @@ export const handler: Handler = async (event: any) => {
   if (!message)
     return { statusCode: 200, body: 'No message, ignored' }
 
+  // ──────────────────────────────────────────────
+  // Manual override command: /set <place> | <date>
+  // ──────────────────────────────────────────────
+  if (typeof message.text === 'string' && message.text.startsWith('/set ')) {
+    const raw = message.text.slice(5).trim()
+    if (!raw) {
+      await sendTelegramMessage(message.chat.id, 'Usage: /set Place, City | YYYY-MM-DD HH:mm')
+      return { statusCode: 200, body: 'bad set syntax' }
+    }
+
+    const [placePart, datePart] = raw.split('|').map((s: string) => s.trim())
+    const [name, ...cityParts] = placePart.split(',').map((s: string) => s.trim())
+    const city = cityParts.join(', ')
+
+    let createdAtSec = Math.floor(Date.now() / 1000)
+    if (datePart) {
+      const parsed = new Date(datePart)
+      if (!Number.isNaN(parsed.getTime()))
+        createdAtSec = Math.floor(parsed.getTime() / 1000)
+    }
+
+    const payload = {
+      venue: { name, location: { city } },
+      createdAt: createdAtSec,
+    }
+
+    const ok = await patchGist(payload)
+    await sendTelegramMessage(
+      message.chat.id,
+      ok ? `✅ Updated! Last seen at ${name}${city ? `, ${city}` : ''}.` : '❌ Failed to update.',
+    )
+    return { statusCode: 200, body: 'manual set processed' }
+  }
+
   let lat: number | undefined
   let lon: number | undefined
   let createdAtSec: number = message.date // seconds
 
-  // Case 1: explicit location
+  // Case 1a: explicit location (regular location or venue)
   if (message.location) {
     lat = message.location.latitude
     lon = message.location.longitude
   }
 
-  // Case 2: photo with EXIF
+  // If the user selected a venue (search result), Telegram includes `venue.title`
+  // Use it directly – it's often more accurate than reverse-geocoding.
+  let venueOverride: string | undefined
+  let cityOverride: string | undefined
+  if (message.venue) {
+    venueOverride = message.venue.title
+    // try to infer city from address last part
+    const addrParts = (message.venue.address as string | undefined)?.split(',').map(p => p.trim())
+    if (addrParts?.length)
+      cityOverride = addrParts[addrParts.length - 1]
+  }
+
+  // Case 1b: document sent as file (preserves EXIF)
+  if (!lat && message.document && message.document.mime_type?.startsWith('image/')) {
+    try {
+      const fileRes = await fetch(`${TELEGRAM_API}/getFile?file_id=${message.document.file_id}`)
+      const fileJson = await fileRes.json()
+      const filePath = fileJson.result.file_path as string
+      const imgRes = await fetch(`https://api.telegram.org/file/bot${BOT_TOKEN}/${filePath}`)
+      const arrayBuf = await imgRes.arrayBuffer()
+      const exif = await parseEXIF(arrayBuf, { translateKeys: false }) as any
+      if (exif && exif.latitude && exif.longitude) {
+        lat = exif.latitude
+        lon = exif.longitude
+      }
+      if (exif?.DateTimeOriginal instanceof Date)
+        createdAtSec = Math.floor(exif.DateTimeOriginal.getTime() / 1000)
+    }
+    catch {
+      console.warn('EXIF parsing failed (document)')
+    }
+  }
+
+  // Case 2: compressed photo (may strip EXIF, but try)
   if (!lat && message.photo) {
     try {
       const largest = message.photo[message.photo.length - 1]
@@ -88,14 +177,7 @@ export const handler: Handler = async (event: any) => {
 
   if (lat === undefined || lon === undefined) {
     // Nothing we can do
-    await fetch(`${TELEGRAM_API}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: message.chat.id,
-        text: 'Could not extract location from that message. Try sending a Location pin?',
-      }),
-    })
+    await sendTelegramMessage(message.chat.id, 'Could not extract location from that message. Try sending a Location pin?')
     return { statusCode: 200, body: 'No location' }
   }
 
@@ -109,8 +191,8 @@ export const handler: Handler = async (event: any) => {
     },
   )
   const geoJson = await geoRes.json()
-  const venueName = pickPlaceName(geoJson)
-  const cityName = pickCity(geoJson)
+  const venueName = venueOverride ?? pickPlaceName(geoJson)
+  const cityName = cityOverride ?? pickCity(geoJson)
 
   const payload = {
     venue: {
@@ -141,14 +223,7 @@ export const handler: Handler = async (event: any) => {
   }
 
   // Let the sender know
-  await fetch(`${TELEGRAM_API}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: message.chat.id,
-      text: `✅ Updated! Last seen at ${payload.venue.name}, ${payload.venue.location.city}.`,
-    }),
-  })
+  await sendTelegramMessage(message.chat.id, `✅ Updated! Last seen at ${payload.venue.name}, ${payload.venue.location.city}.`)
 
   return { statusCode: 200, body: 'ok' }
 }

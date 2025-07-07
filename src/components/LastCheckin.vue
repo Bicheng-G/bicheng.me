@@ -47,6 +47,6 @@ const finalMessage = computed(
 </script>
 
 <template>
-  <span v-if="isLoading">Looking for BC...</span>
+  <span v-if="isLoading">looking for BC...</span>
   <span v-else>{{ finalMessage }}</span>
 </template>
