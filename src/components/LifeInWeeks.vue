@@ -13,10 +13,19 @@ const ROWS = Math.ceil(TOTAL_MONTHS / COLS)
 
 // Calculate time dynamically using VueUse's useNow
 const now = useNow({ interval: 1000 * 60 * 60 }) // Update every hour
+// High-frequency clock for animated counters (≈50 FPS)
+const nowFast = useNow({ interval: 20 })
+
+// Milliseconds in a tropical year (365.2425 days)
+const MS_PER_YEAR = 1000 * 60 * 60 * 24 * 365.2425
 const age = computed(() => dayjs(now.value).diff(BIRTH_DATE, 'month'))
 const monthsLived = computed(() => Math.floor(age.value))
 const currentMonth = computed(() => monthsLived.value + 1)
-const percentageLived = computed(() => ((monthsLived.value / TOTAL_MONTHS) * 100).toFixed(1))
+// Animated life-percentage with 20 decimal places
+const percentageLived = computed(() => {
+  const ageYears = (dayjs(nowFast.value).valueOf() - BIRTH_DATE.valueOf()) / MS_PER_YEAR
+  return ((ageYears / LIFE_SPAN) * 100).toFixed(20)
+})
 
 // Create a more efficient grid using CSS custom properties
 const gridStyle = computed(() => ({
@@ -138,8 +147,7 @@ function formatTooltipDate(monthIndex: number) {
 
     <!-- Simple stats at bottom -->
     <div class="mt-4 text-xs flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-gray-600 dark:text-gray-300">
-      <span>{{ monthsLived }}/{{ TOTAL_MONTHS }} months</span>
-      <span>{{ percentageLived }}% of life lived</span>
+      <span class="font-mono">{{ percentageLived }} %</span>
     </div>
   </div>
 </template>
