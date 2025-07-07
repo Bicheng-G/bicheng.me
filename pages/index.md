@@ -22,7 +22,7 @@ Off-screen, I enjoy photography and traveling, I post [photos on this page](/pho
 
 <LastCheckin />If you are around, let's have some coffee or work together.
 
-<div slide-enter slide-enter-2 mb-8>
+<div slide-enter slide-enter-2 my-6>
 <PhotoGalleryHighlights />
 </div>
 

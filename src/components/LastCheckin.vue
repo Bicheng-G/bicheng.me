@@ -21,7 +21,7 @@ const isLoading = ref(true)
 onMounted(async () => {
   try {
     const res = await fetch('/.netlify/functions/last-checkin')
-    if (res.ok) {
+    if (res.ok && res.headers.get('content-type')?.includes('application/json')) {
       data.value = await res.json()
     }
   }
@@ -41,12 +41,10 @@ const timeAgo = computed(() => {
 
 const placeName = computed(() => data.value?.venue?.name || 'somewhere')
 const cityName = computed(() => data.value?.venue?.location?.city || 'this universe')
-const finalMessage = computed(
-  () => `Last seen ${timeAgo.value}, at ${placeName.value} in ${cityName.value}. `,
-)
+// We will render the sentence directly in the template so the icon span is parsed as real HTML.
 </script>
 
 <template>
-  <span v-if="isLoading">Looking for BC...<br></span>
-  <span v-else>{{ finalMessage }}</span>
+  <span v-if="isLoading">Looking for BC...</span>
+  <span v-else>Last seen {{ timeAgo }}, at {{ placeName }}<span i-ri-pushpin-line /> in {{ cityName }}.</span>
 </template>
