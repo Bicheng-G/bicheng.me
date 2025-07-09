@@ -49,5 +49,5 @@ const mapUrl = computed(() =>
 
 <template>
   <span v-if="isLoading">Looking for BC...</span>
-  <span v-else>Last seen {{ timeAgo }}, at <a :href="mapUrl" target="_blank" rel="noopener noreferrer"> {{ placeName }}<span i-ri-pushpin-line /></a> in {{ cityName }}.</span>
+  <span v-else><span i-line-md-map-marker-radius-twotone /> Last seen {{ timeAgo }}, at <a :href="mapUrl" target="_blank" rel="noopener noreferrer"> {{ placeName }}<span i-ri-pushpin-line /></a> in {{ cityName }}.</span>
 </template>

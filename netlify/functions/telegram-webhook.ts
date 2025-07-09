@@ -57,6 +57,55 @@ function pickCity(obj: any) {
   )
 }
 
+// Extract timestamp from EXIF data, trying several common date tags.
+function extractTimestamp(exif: any): number | undefined {
+  const dateTags = [
+    'DateTimeOriginal',
+    'CreateDate',
+    'DateTimeDigitized',
+    'ModifyDate',
+    'GPSDateStamp',
+    'DateTime',
+  ]
+  for (const tag of dateTags) {
+    const val = exif?.[tag]
+    if (!val)
+      continue
+    if (val instanceof Date)
+      return Math.floor(val.getTime() / 1000)
+    if (typeof val === 'string') {
+      // EXIF date strings are usually "YYYY:MM:DD HH:mm:SS"
+      const parsed = new Date(val.replace(/^(\d{4}):(\d{2}):(\d{2})/, '$1-$2-$3'))
+      if (!Number.isNaN(parsed.getTime()))
+        return Math.floor(parsed.getTime() / 1000)
+    }
+  }
+  return undefined
+}
+
+// Try to get the most specific place name: first at building/POI level (zoom 18),
+// then fall back to suburb/locality (zoom 14) if nothing useful is returned.
+async function reverseGeocode(lat: number, lon: number) {
+  const base = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2'
+  for (const zoom of [18, 14]) {
+    const res = await fetch(`${base}&lat=${lat}&lon=${lon}&zoom=${zoom}&addressdetails=1`, {
+      headers: { 'User-Agent': 'last-checkin-bot' },
+    })
+    if (!res.ok)
+      continue
+    const json = await res.json()
+    const name = pickPlaceName(json)
+    if (name && name !== 'Somewhere')
+      return { json, name }
+  }
+  // Final fallback with a lower zoom just in case
+  const res = await fetch(`${base}&lat=${lat}&lon=${lon}&zoom=10&addressdetails=1`, {
+    headers: { 'User-Agent': 'last-checkin-bot' },
+  })
+  const json = await res.json()
+  return { json, name: pickPlaceName(json) }
+}
+
 export const handler: Handler = async (event: any) => {
   if (event.httpMethod !== 'POST')
     return { statusCode: 405, body: 'Method Not Allowed' }
@@ -150,8 +199,9 @@ export const handler: Handler = async (event: any) => {
         lat = exif.latitude
         lon = exif.longitude
       }
-      if (exif?.DateTimeOriginal instanceof Date)
-        createdAtSec = Math.floor(exif.DateTimeOriginal.getTime() / 1000)
+      const ts = extractTimestamp(exif)
+      if (ts)
+        createdAtSec = ts
     }
     catch {
       console.warn('EXIF parsing failed (document)')
@@ -172,8 +222,9 @@ export const handler: Handler = async (event: any) => {
         lat = exif.latitude
         lon = exif.longitude
       }
-      if (exif?.DateTimeOriginal instanceof Date)
-        createdAtSec = Math.floor(exif.DateTimeOriginal.getTime() / 1000)
+      const ts = extractTimestamp(exif)
+      if (ts)
+        createdAtSec = ts
     }
     catch {
       console.warn('EXIF parsing failed')
@@ -187,16 +238,8 @@ export const handler: Handler = async (event: any) => {
   }
 
   // Reverse geocode
-  const geoRes = await fetch(
-    `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&zoom=14&addressdetails=1`,
-    {
-      headers: {
-        'User-Agent': 'last-checkin-bot',
-      },
-    },
-  )
-  const geoJson = await geoRes.json()
-  const venueName = venueOverride ?? pickPlaceName(geoJson)
+  const { json: geoJson, name: placeName } = await reverseGeocode(lat, lon)
+  const venueName = venueOverride ?? placeName
   const cityName = cityOverride ?? pickCity(geoJson)
 
   const payload = {

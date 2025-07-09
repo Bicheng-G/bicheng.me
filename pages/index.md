@@ -59,4 +59,4 @@ Find me on
 
 Or mail me at <TextCopy inline-block relative><span font-mono>hi<span i-carbon-at/><span absolute left=1 class="opacity-0">@</span>bicheng.me</span></TextCopy>
 
-<LastCheckin /> Let's have coffee or work together.
+<LastCheckin />
