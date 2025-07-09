@@ -12,23 +12,21 @@ import { defineAsyncComponent } from 'vue'
 const LifeInWeeksLazy = defineAsyncComponent(() => import('../src/components/LifeInWeeks.vue'))
 </script>
 
-Hey! I'm <span class="text-[var(--fg-deeper)]"><ruby lang="ja">Bicheng Gu<rp>(</rp><rt>必成 顾</rt><rp>)</rp></ruby></span>, a pragmatic product manager well versed in business development.
+Hey! I'm <span class="text-[var(--fg-deeper)]"><ruby lang="ja">Bicheng Gu<rp>(</rp><rt>必成 顾</rt><rp>)</rp></ruby></span>, a fantastic product manager driving innovative solutions.
 
 Working at {Elitetax Systems} {Soon Heng}<br>
 Incubating {Elite CoPilot} {Pivox}<br>
 Creator of {Pet Parents Club}<br>
 
-Off-screen, I enjoy photography and traveling, I post [photos on this page](/photos). Inspired by learning out loud, I write [blog posts](/posts) about self-actualization, metacognition, sciense-based-parenting, etc.
+> Give me an idea, and I shall iterate it into the product users can't live without.
 
-<LastCheckin /> If you are around, let's have some coffee or work together.
+With a keen interest and curiousity, I like to explore various topics. Find things I'm not proud of, I'm working on, or I'm learning about [here](/projects).
 
 <div slide-enter slide-enter-2 my-6>
-<PhotoGalleryHighlights />
+  <PhotoGalleryHighlights />
 </div>
 
-As an optimizer, I'm adept in polishing the product and refining the process.
-
-> Give me a v0 and a direct line to users, and I shall iterate it into the product users can't live without.
+Off-screen, I enjoy photography and traveling, I post [photos on this page](/photos). Inspired by learning out loud, I write [blog posts](/posts) about self-actualization, metacognition, sciense-based-parenting, etc.
 
 Looking at the entire lifespan from a distance reminds me to <span class="text-[var(--fg-deeper)]"><ruby lang="ja">live in the moment<rp>(</rp><rt>活在当下</rt><rp>)</rp></ruby></span>.
 
@@ -60,3 +58,5 @@ Find me on
 </p>
 
 Or mail me at <TextCopy inline-block relative><span font-mono>hi<span i-carbon-at/><span absolute left=1 class="opacity-0">@</span>bicheng.me</span></TextCopy>
+
+<LastCheckin /> Let's have coffee or work together.

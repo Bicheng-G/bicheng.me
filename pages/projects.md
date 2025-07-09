@@ -1,0 +1,100 @@
+---
+title: Projects - Bicheng Gu
+display: Projects
+description: My Collections
+wrapperClass: 'text-center'
+art: dots
+projects:
+  Current Focus:
+    - name: 'Fleet Safety Solutions'
+      link: 'https://elitetaxsystems.com/Solution-EliteCopilot'
+      desc: 'Inspect the intermediate state of Vite bundle and pipeline'
+      icon: 'i-lineicons-road'
+    - name: 'AI Toy'
+      link: ''
+      desc: 'Unleash Nuxt Developer Experience'
+      icon: 'i-carbon-machine-learning'
+    - name: 'Automotive LED Signage'
+      link: ''
+      desc: 'Interactive Playground for learning Nuxt'
+      icon: 'i-carbon-ibm-elo-automotive-compliance'
+
+  Vibe Coding:
+    - name: 'Boke Tools Repair Portal'
+      link: 'https://boke-repair-dep.vercel.app/'
+      desc: 'My 100 day challenge of exploring design, compform, and new things.'
+      icon: 'i-game-icons-auto-repair'
+    - name: 'Elite CoPilot'
+      link: 'https://copilot.elitetaxsystems.com/'
+      desc: 'Learn and create computation form, one sketch a day. (In collabration with @octref)'
+      icon: 'i-carbon-checkbox'
+    - name: 'Faang Studio'
+      link: 'https://faang.studio'
+      desc: 'p5.js, but with more friendly instance mode APIs'
+      icon: 'i-carbon-paint-brush'
+
+  Fork & Learn:
+    - name: 'Elk'
+      link: 'https://github.com/elk-zone/elk'
+      desc: 'A nimble Mastodon web client'
+      icon: 'elk'
+    - name: 'Icônes'
+      link: 'https://icones.js.org/'
+      desc: 'Iconify Explorer with Instant searching'
+      icon: 'i-carbon-type-pattern'
+    - name: 'QR Toolkit'
+      link: 'https://qrcode.antfu.me/'
+      desc: 'Toolkit for QR code generation on stable diffusion'
+      icon: 'i-carbon-qr-code'
+    - name: 'rhein.'
+      link: 'https://rhein.netlify.app/'
+      desc: 'Text editor with freedom of layouting'
+      icon: 'i-carbon-data-vis-4'
+    - name: 'Prism --theme-vars'
+      link: 'https://github.com/antfu/prism-theme-vars'
+      desc: 'A customizable Prism.js theme using CSS variables'
+      icon: 'i-carbon-angle'
+    - name: 'ReX'
+      link: 'https://rex.antfu.me/'
+      desc: 'Transform texts with RegExp like a Pro'
+      icon: 'i-carbon-text-align-mixed'
+    - name: 'Foto Rehearser'
+      link: 'https://foto.inesfendi.com/'
+      desc: 'Photo post planner'
+      icon: 'i-uim-instagram'
+    - name: 'Café'
+      link: 'https://cafe-cn.netlify.app/'
+      desc: 'Web App for <a href="https://github.com/ElaWorkshop/awesome-cn-cafe" target="_blank">Awesome CN Café</a>'
+      icon: 'i-carbon-cafe'
+    - name: '文言齋'
+      link: 'https://ide.wy-lang.org'
+      desc: 'Online IDE for wenyan-lang'
+      icon: 'i-carbon-template'
+    - name: 'BreadSplit'
+      link: 'https://app.breadsplit.com/'
+      desc: 'Group bills split made easy, fast and customizable'
+      icon: 'i-carbon-share-knowledge'
+    - name: 'BCP-47 tester'
+      link: 'https://bcp47.antfu.me/'
+      desc: 'Online BCP-47 Tester & Normalizer'
+      icon: 'i-carbon-earth-southeast-asia'
+
+  Data Analytics:
+    - name: 'Refined GitHub Notification'
+      link: 'https://github.com/antfu/refined-github-notifications'
+      desc: 'Enhances the GitHub Notifications, more productive and less noisy.'
+      icon: 'i-carbon:box'
+    - name: 'Clean Twitter'
+      link: 'https://github.com/antfu/userscript-clean-twitter'
+      desc: 'Bring back the peace on Twitter'
+      icon: 'i-ion-logo-twitter'
+
+  Scripts:
+    - name: 'Tik Tok Downloader Shortcut'
+      link: 'https://github.com/antfu/1990-script'
+      desc: 'Download Douyin Video without watermark on iOS'
+      icon: 'i-carbon-download'
+---
+
+<!-- @layout-full-width -->
+<ListProjects :projects="frontmatter.projects" />

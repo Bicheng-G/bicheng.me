@@ -8,11 +8,11 @@ function slug(name: string) {
 
 <template>
   <div class="max-w-300 mx-auto">
-    <p text-center mt--6 mb5 op50 text-lg italic>
-      Projects that I created or maintaining.
+    <p text-center mt--2 mb5 px-4 op50 text-md italic>
+      Something I'm not proud of, I'm working on, or I'm learning about.
     </p>
     <div class="prose pb5 mx-auto mt10 text-center">
-      <div flex="~ gap-2 justify-center">
+      <!--       <div flex="~ gap-2 justify-center">
         <a
           href="https://github.com/antfu"
           target="_blank"
@@ -46,7 +46,7 @@ function slug(name: string) {
           />
           Yak Map
         </a>
-      </div>
+      </div> -->
       <hr>
     </div>
     <div
@@ -92,13 +92,6 @@ function slug(name: string) {
           </div>
         </a>
       </div>
-    </div>
-    <div class="prose pb5 mx-auto mt10 text-center">
-      <div block mt-5>
-        <a href="https://antfu.me/stars-rank" target="_blank" op50>All projects sort by Stars</a>
-      </div>
-      <hr>
-      <SponsorButtons />
     </div>
   </div>
   <div>
