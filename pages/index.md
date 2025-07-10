@@ -45,6 +45,8 @@ Looking at the entire lifespan from a distance reminds me to <span class="text-[
 
 ---
 
+<LastCheckin />
+
 Find me on
 
 <p flex="~ gap-2 wrap" class="mt--2!">
@@ -58,5 +60,3 @@ Find me on
 </p>
 
 Or mail me at <TextCopy inline-block relative><span font-mono>hi<span i-carbon-at/><span absolute left=1 class="opacity-0">@</span>bicheng.me</span></TextCopy>
-
-<LastCheckin />
