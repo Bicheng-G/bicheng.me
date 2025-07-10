@@ -5,6 +5,16 @@ description: A Collections of my interest
 wrapperClass: 'text-center'
 art: dots
 projects:
+  Pinned:
+    - name: 'bcOs'
+      link: 'https://os.bicheng.me/'
+      desc: 'A operation system that lives in your browser.'
+      icon: 'i-eos-icons-installing'
+    - name: 'Resume'
+      link: 'https://cv.bicheng.me/'
+      desc: 'A copy of my personal resume.'
+      icon: 'i-pepicons-pencil-cv'
+
   Current Focus:
     - name: 'Elite CoPilot'
       link: 'https://elitetaxsystems.com/Solution-EliteCopilot'
