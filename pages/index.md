@@ -50,13 +50,13 @@ Looking at the entire lifespan from a distance reminds me to <span class="text-[
 Find me on
 
 <p flex="~ gap-2 wrap" class="mt--2!">
-  <a href="https://www.linkedin.com/in/bicheng-gu" target="_blank"><span op75 i-simple-icons-linkedin /> LinkedIn </a>
+  <a href="https://www.linkedin.com/in/bicheng-gu" target="_blank"><span op75 i-simple-icons-linkedin mr-0.5/> LinkedIn </a>
   <span op25> / </span>
-  <a href="https://github.com/Bicheng-G" target="_blank"><span op75 i-simple-icons-github /> GitHub </a>
+  <a href="https://github.com/Bicheng-G" target="_blank"><span op75 i-simple-icons-github mr-0.5/> GitHub </a>
   <span op25> / </span>
   <a href="https://x.com/0xAilurus" target="_blank"><span op75 i-ri-twitter-x-fill /> Twitter </a>
   <span op25> / </span>
-  <a href="https://wa.me/6585882413?text=Hi%20Bicheng%2C%20I%20saw%20your%20blog%20and%20.." target="_blank"><span op75 i-simple-icons-whatsapp /> WhatsApp </a>
+  <a href="https://wa.me/6585882413?text=Hi%20Bicheng%2C%20I%20saw%20your%20blog%20and%20.." target="_blank"><span op75 i-simple-icons-whatsapp  mr-0.5/> WhatsApp </a>
 </p>
 
 Or mail me at <TextCopy inline-block relative><span font-mono>hi<span i-carbon-at/><span absolute left=1 class="opacity-0">@</span>bicheng.me</span></TextCopy>

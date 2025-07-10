@@ -48,6 +48,6 @@ const mapUrl = computed(() =>
 </script>
 
 <template>
-  <span v-if="isLoading"><span i-carbon-location-current /> Looking for BC...</span>
-  <span v-else><span i-carbon-location-current /> Last seen {{ timeAgo }}, at <a :href="mapUrl" target="_blank" rel="noopener noreferrer"> {{ placeName }}<span i-ri-pushpin-line /></a> in {{ cityName }}.</span>
+  <span v-if="isLoading"><span i-carbon-location-current op-80 text-blue /> Looking for BC...</span>
+  <span v-else><span i-carbon-location-current op-80 text-grey /> Last seen {{ timeAgo }}, at <a :href="mapUrl" target="_blank" rel="noopener noreferrer"> {{ placeName }}</a> in {{ cityName }}.</span>
 </template>
