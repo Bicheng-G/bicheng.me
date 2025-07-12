@@ -12,21 +12,21 @@ import { defineAsyncComponent } from 'vue'
 const LifeInWeeksLazy = defineAsyncComponent(() => import('../src/components/LifeInWeeks.vue'))
 </script>
 
-Hey! I'm <span class="text-[var(--fg-deeper)]"><ruby lang="ja">Bicheng Gu<rp>(</rp><rt>必成 顾</rt><rp>)</rp></ruby></span>, a fantastic product manager driving innovative solutions.
+Hey! I'm <span class="text-[var(--fg-deeper)]"><ruby lang="ja">Bicheng Gu<rp>(</rp><rt>必成 顾</rt><rp>)</rp></ruby></span>, a fantastic product manager building business solutions.
 
 Working at {Elitetax Systems} {Soon Heng}<br>
 Incubating {Elite CoPilot} {Pivox}<br>
 Creator of {Pet Parents Club}<br>
 
-> Give me an idea, and I shall iterate it into the product users can't live without.
+> Explore broadly to find your path. Dig deeply to make it meaningful.
 
-With a keen interest and curiousity, I like to explore various topics. Find things I'm not proud of, I'm working on, or I'm learning about [here](/projects).
+I explore widely, experiment often, and refine constantly  - [here's](/projects) a collection of things I'm building, or still figuring out. People know me for delivering quality work - the kind that make you say, "Hey, I have to praise you on that!"
 
 <div slide-enter slide-enter-2 my-6>
   <PhotoGalleryHighlights />
 </div>
 
-Off-screen, I enjoy photography and traveling, I post [photos on this page](/photos). Inspired by learning out loud, I write [blog posts](/posts) about self-actualization, metacognition, sciense-based-parenting, etc.
+Off-screen, I enjoy photography and traveling, I post [photos on this page](/photos). Inspired by learn in public, I write [blog posts](/posts) about self-actualization, metacognition, sciense-based-parenting, etc.
 
 Looking at the entire lifespan from a distance reminds me to <span class="text-[var(--fg-deeper)]"><ruby lang="ja">live in the moment<rp>(</rp><rt>活在当下</rt><rp>)</rp></ruby></span>.
 

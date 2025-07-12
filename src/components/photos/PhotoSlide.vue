@@ -42,9 +42,9 @@ function handleWheel(e: WheelEvent) {
         :data-photo-index="idx"
         :loading="idx === 0 ? 'eager' : 'lazy'"
         :fetchpriority="idx === 0 ? 'high' : 'auto'"
-        class="w-full aspect-square object-cover w-80 h-80 max-w-80 max-h-80 min-w-80 min-h-80"
-        width="320"
-        height="320"
+        class="aspect-square object-cover w-60 h-60 max-w-60 max-h-60 min-w-60 min-h-60"
+        width="240"
+        height="240"
       >
       <div text-sm op75 mt2>
         {{ photo?.text }}

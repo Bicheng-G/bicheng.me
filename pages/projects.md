@@ -6,7 +6,7 @@ wrapperClass: 'text-center'
 art: dots
 projects:
   Pinned:
-    - name: 'bcOs'
+    - name: 'bcOS'
       link: 'https://os.bicheng.me/'
       desc: 'A operation system that lives in your browser.'
       icon: 'i-eos-icons-installing'
@@ -52,14 +52,10 @@ projects:
       link: 'https://sg.bicheng.me/'
       desc: 'All roads in Singapore.'
       icon: 'i-gis-road-map'
-    - name: 'bcOs'
+    - name: 'bcOS'
       link: 'https://os.bicheng.me/'
       desc: 'A operation system that lives in your browser.'
       icon: 'i-eos-icons-installing'
-    - name: 'Resume'
-      link: 'https://cv.bicheng.me/'
-      desc: 'A copy of my personal resume.'
-      icon: 'i-pepicons-pencil-cv'
 
   Machine Learning:
     - name: 'Fun with Computer Vision'
