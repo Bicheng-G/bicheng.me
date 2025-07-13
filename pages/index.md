@@ -18,9 +18,11 @@ Working at {Elitetax Systems} {Soon Heng}<br>
 Incubating {Elite CoPilot} {Pivox}<br>
 Creator of {Pet Parents Club}<br>
 
-> Explore broadly to find your path. Dig deeply to make it meaningful.
+> Explore boldly to find your path. Dig deeply to make it meaningful.
 
-I explore widely, experiment often, and refine constantly  - [here's](/projects) a collection of things I'm building, or still figuring out. People know me for delivering quality work - the kind that make you say, "Hey, I have to praise you on that!"
+I venture across disciplines, experiment often, and refine constantly  - [here's](/projects) a collection of things I'm building, or still figuring out. People know me for delivering quality work - the kind that make you say, "Hey, I have to praise you on that!"
+
+<LastCheckin />
 
 <div slide-enter slide-enter-2 my-6>
   <PhotoGalleryHighlights />
