@@ -22,8 +22,6 @@ Creator of {Pet Parents Club}<br>
 
 I venture across disciplines, experiment often, and refine constantly  - [here's](/projects) a collection of things I'm building, or still figuring out. People know me for delivering quality work - the kind that make you say, "Hey, I have to praise you on that!"
 
-<LastCheckin />
-
 <div slide-enter slide-enter-2 my-6>
   <PhotoGalleryHighlights />
 </div>
